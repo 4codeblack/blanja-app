@@ -18,3 +18,14 @@
 .text-danger {
   color: #DB3022!important;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Metropolis";
+  src: url("./fonts/Metropolis-Medium.otf") format("opentype");
+}

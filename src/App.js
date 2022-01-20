@@ -1,15 +1,9 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Cart from "./pages/main/Cart"
+import React from "react";
+import Router from "./config/Router";
+import "./App.css";
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="cart" element={<Cart />} />
-      </Routes>
-    </BrowserRouter>
-  )
-};
+function App() {
+  return <Router />;
+}
 
 export default App;

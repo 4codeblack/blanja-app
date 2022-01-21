@@ -1,0 +1,30 @@
+/* styling cards */
+.card {
+  width: 15rem;
+  margin-right: 2em;
+  margin-top: 2em;
+  background: #ffffff;
+  box-shadow: 0px 0px 14px rgba(173, 173, 173, 0.25);
+  border-radius: 12px !important;
+}
+.card img {
+  object-fit: cover;
+}
+.product-name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+.product-price {
+  color: #db3022;
+}
+.store-name {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: #9b9b9b;
+}
+.star-icons {
+  color: #ffba49;
+}

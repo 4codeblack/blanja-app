@@ -1,14 +1,25 @@
-import React, { Fragment } from "react";
-import * as AiIcons from "react-icons/ai";
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
 import Slider from "../../../components/module/CarouselPromo/Slider";
-import suit from "../../../assets/img/suit.png";
+import CarouselCategory from "../../../components/module/CarouselCategory";
+import Cards from "../../../components/module/Cards";
 import "./home.css";
-import Carousel from "react-elastic-carousel";
-import socks from "../../../assets/img/carouselCategory/socks.png";
-import heels from "../../../assets/img/carouselCategory/high-heels.png";
-import tie from "../../../assets/img/carouselCategory/tie.png";
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://blanja-backend.herokuapp.com/customer/all-product")
+      .then((res) => {
+        console.info(res.data);
+        const result = res.data.data;
+        setProducts(result);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, []);
   return (
     <Fragment>
       <section className="slider d-flex flex-column">
@@ -23,16 +34,7 @@ const Home = () => {
           </div>
 
           <div className="slider-category d-flex justify-content-center align-items-center">
-            <Carousel itemsToShow={3}>
-              <img src={socks} alt="socks" />
-              <img src={tie} alt="socks" />
-              <img src={heels} alt="socks" />
-              <img src={socks} alt="socks" />
-              <img src={socks} alt="socks" />
-              <img src={socks} alt="socks" />
-              <img src={socks} alt="socks" />
-              <img src={socks} alt="socks" />
-            </Carousel>
+            <CarouselCategory />
           </div>
         </div>
       </section>
@@ -46,61 +48,13 @@ const Home = () => {
 
           <section className="card-wrapper">
             {/* cards component */}
-            <div class="card ">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
-            <div class="card ">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
-            <div class="card ">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
-            <div class="card ">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
-            <div class="card ">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
+            {products.map((product, index) => (
+              <Cards
+                productName={product.Name}
+                productPrice={product.price}
+                storeName={product.namestore}
+              />
+            ))}
           </section>
         </div>
 
@@ -114,17 +68,13 @@ const Home = () => {
 
           <section className="card-wrapper">
             {/* cards component */}
-            <div class="card">
-              <img src={suit} class="card-img-top" alt="product" />
-              <div class="card-body">
-                <h5 class="card-title product-name">
-                  Men's formal suit - Black & White
-                </h5>
-                <p class="card-text product-price">$ 40.0</p>
-                <p class="card-text store-name">Zalora Cloth</p>
-                <AiIcons.AiFillStar className="star-icons" />
-              </div>
-            </div>
+            {products.map((product, index) => (
+              <Cards
+                productName={product.Name}
+                productPrice={product.price}
+                storeName={product.namestore}
+              />
+            ))}
           </section>
         </div>
       </section>

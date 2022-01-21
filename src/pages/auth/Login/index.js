@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 import Button from '../../../components/base/Button';
 import Input from '../../../components/base/Input';
 import '../index.css'
@@ -7,6 +8,7 @@ import '../index.css'
 const LoginCustomer = () => {
     const [togledUser, setTogledUser] = useState(true)
     const [togledSeller, setTogledSeller] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [formCustomer, setFormCustomer] = useState({
         email: '',
@@ -50,10 +52,38 @@ const LoginCustomer = () => {
         }
     }
     const handleClickCustomer = () => {
+        setLoading(true)
         console.log(formCustomer)
+        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/customer`,
+        {
+            email: formCustomer.email,
+            password: formCustomer.password
+        })
+        .then((res) => {
+            setLoading(false)
+            alert(res.data.message)
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     const handleClickSeller = () => {
-        console.log(formSeller)
+        setLoading(true)
+        console.log(formCustomer)
+        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/seller`,
+        {
+            email: formSeller.email,
+            password: formSeller.password
+        })
+        .then((res) => {
+            setLoading(false)
+            alert(res.data.message)
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     return (
         <Fragment>

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Button from '../../../components/base/Button';
 import Input from '../../../components/base/Input';
 import '../index.css'
@@ -7,6 +8,7 @@ import '../index.css'
 const Register = () => {
     const [togledUser, setTogledUser] = useState(true)
     const [togledSeller, setTogledSeller] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [formCustomer, setFormCustomer] = useState({
         name: '',
@@ -18,7 +20,7 @@ const Register = () => {
         name: '',
         email: '',
         phone: '',
-        store: '',
+        storename: '',
         password: '',
         role: 'seller'
     })
@@ -49,7 +51,7 @@ const Register = () => {
                 name: '',
                 email: '',
                 phone: '',
-                store: '',
+                storename: '',
                 password: '',
                 role: 'seller'
             })
@@ -58,10 +60,41 @@ const Register = () => {
         }
     }
     const handleClickCustomer = () => {
+        setLoading(true)
         console.log(formCustomer)
+        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/register/customer`,
+        {
+            name: formCustomer.name,
+            password: formCustomer.password,
+            email: formCustomer.email
+        })
+        .then((res) => {
+            setLoading(false)
+            alert(res.data.message)
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     const handleClickSeller = () => {
         console.log(formSeller)
+        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/register/seller`,
+        {
+            name: formSeller.name,
+            email: formSeller.email,
+            phone: formSeller.phone,
+            storename: formSeller.storename,
+            password: formSeller.password
+        })
+        .then((res) => {
+            setLoading(false)
+            alert(res.data.message)
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
     return (
         <Fragment>
@@ -124,9 +157,9 @@ const Register = () => {
                         <Input
                             className="mt-3 w-50 py-2"
                             type="text"
-                            name="store"
+                            name="storename"
                             onChange={handleChangeSeller}
-                            value={formSeller.store}
+                            value={formSeller.storename}
                             placeholder="Store name" />
                         <Input
                             className="mt-3 w-50 py-2"

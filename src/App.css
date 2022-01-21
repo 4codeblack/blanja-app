@@ -19,10 +19,19 @@
   color: #DB3022!important;
 }
 
+.btn-minus {
+  background: #D4D4D4!important;
+}
+
+.fw-light {
+  color: #9B9B9B;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  outline: 0;
 }
 
 @font-face {

@@ -1,0 +1,52 @@
+.navbar {
+    height: 10vh;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 6px 40px rgba(173, 173, 173, 0.25);
+  }
+  .search-product-wrapper {
+    width: 450px;
+    padding: 0.5em;
+  }
+  .search-product,
+  .filter-products {
+    background: #ffffff;
+    border: 1px solid #8e8e93;
+    border-radius: 21px;
+  }
+  .search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    line-height: 0.3em;
+  }
+  .filter-products {
+    border-radius: 12px;
+  }
+  
+  .navbar-icons {
+    color: #9b9b9b;
+    font-size: 1.5em;
+  }
+  .navbar-icons:active,
+  .navbar-icons:hover {
+    color: #db3022;
+  }
+  .navbar-btn-login {
+    background: #db3022;
+    border-radius: 25px;
+    color: #fff;
+    padding: 0.3em 1.8em;
+  }
+  .navbar-btn-signup {
+    border: 1px solid #9b9b9b;
+    color: #9b9b9b;
+    border-radius: 24px;
+    padding: 0.3em 1.8em;
+  }
+  .navbar-logo,
+  .filter-icon,
+  .navbar-icons {
+    cursor: pointer;
+  }
+  

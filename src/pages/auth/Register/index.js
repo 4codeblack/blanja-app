@@ -70,7 +70,7 @@ const Register = () => {
         const errors = {};
         const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         if (!values.name) {
-            errors.name = "First Name is required";
+            errors.name = "Name is required";
         }
         if (!values.email) {
             errors.email = "Email is required";
@@ -88,7 +88,7 @@ const Register = () => {
         const errors = {};
         const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         if (!values.name) {
-            errors.name = "First Name is required";
+            errors.name = "Name is required";
         }
         if (!values.email) {
             errors.email = "Email is required";
@@ -245,7 +245,7 @@ const Register = () => {
                     <Button isLoading={loading} onClick={handleSubmitSeller} className="btn-danger bg-gradient rounded-pill w-50 py-3 mt-5">Register</Button>
                 </div>
             )}
-            <div className="text-center mt-3">Already have a Tokopedia account? <Link to={"/auth/login"} className="text-danger" style={{ textDecoration: 'none' }}>Login</Link></div>
+            <div className="text-center mt-3 mb-5">Already have a Tokopedia account? <Link to={"/auth/login"} className="text-danger" style={{ textDecoration: 'none' }}>Login</Link></div>
         </Fragment>
     )
 };

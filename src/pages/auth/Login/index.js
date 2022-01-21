@@ -11,6 +11,7 @@ const LoginCustomer = () => {
     const [loading, setLoading] = useState(false)
     const [formErrorCustomer, setFormErrorCustomer] = useState({})
     const [formErrorSeller, setFormErrorSeller] = useState({})
+    const [messageResponse, setMessageResponse] = useState("")
 
     const [formCustomer, setFormCustomer] = useState({
         email: '',
@@ -31,6 +32,7 @@ const LoginCustomer = () => {
                 role: 'customer'
             })
             setFormErrorCustomer({})
+            setMessageResponse("")
             setTogledUser(false)
             setTogledSeller(true)
         } else {
@@ -40,6 +42,7 @@ const LoginCustomer = () => {
                 role: 'seller'
             })
             setFormErrorSeller({})
+            setMessageResponse("")
             setTogledUser(true)
             setTogledSeller(false)
         }
@@ -101,11 +104,12 @@ const LoginCustomer = () => {
                 console.log(res)
                 alert(res.data.message)
                 setLoading(false)
+                setMessageResponse("")
             })
             .catch((err) => {
                 console.log(err.response)
-                alert(err.response.data.message)
                 setLoading(false)
+                setMessageResponse(err.response.data.message)
             })
         }
     }
@@ -122,11 +126,13 @@ const LoginCustomer = () => {
                 alert(res.data.message)
                 console.log(res)
                 setLoading(false)
+                setMessageResponse("")
             })
             .catch((err) => {
                 console.log(err.response)
-                alert(err.response.data.message)
                 setLoading(false)
+                setMessageResponse(true)
+                setMessageResponse(err.response.data.message)
             })
         }
     }
@@ -144,6 +150,7 @@ const LoginCustomer = () => {
         handleClickSeller(resultValidate);
         console.log("isi dari", formSeller)
     }
+
     return (
         <Fragment>
             <div className="text-center fw-bold my-5">Please login with your account</div>
@@ -153,6 +160,7 @@ const LoginCustomer = () => {
             </div>
             {togledUser ? (
                 <div className="text-center d-flex flex-column justify-content-center align-items-center">
+                    {messageResponse ? <div className="text-danger">{messageResponse}</div> : ""}
                     <Input
                         className="mt-3 w-50 py-2"
                         type="text"
@@ -174,6 +182,7 @@ const LoginCustomer = () => {
                 </div>
             ) : (
                 <div className="text-center d-flex flex-column justify-content-center align-items-center">
+                    {messageResponse ? <div className="text-danger">{messageResponse}</div> : ""}
                     <Input
                         className="mt-3 w-50 py-2"
                         type="text"

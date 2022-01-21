@@ -9,6 +9,8 @@ const LoginCustomer = () => {
     const [togledUser, setTogledUser] = useState(true)
     const [togledSeller, setTogledSeller] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [formErrorCustomer, setFormErrorCustomer] = useState({})
+    const [formErrorSeller, setFormErrorSeller] = useState({})
 
     const [formCustomer, setFormCustomer] = useState({
         email: '',
@@ -20,6 +22,29 @@ const LoginCustomer = () => {
         password: '',
         role: 'seller'
     })
+
+    const onClick = () => {
+        if (togledUser) {
+            setFormCustomer({
+                email: '',
+                password: '',
+                role: 'customer'
+            })
+            setFormErrorCustomer({})
+            setTogledUser(false)
+            setTogledSeller(true)
+        } else {
+            setFormSeller({
+                email: '',
+                password: '',
+                role: 'seller'
+            })
+            setFormErrorSeller({})
+            setTogledUser(true)
+            setTogledSeller(false)
+        }
+    }
+
     const handleChangeCustomer = (e) => {
         setFormCustomer({
             ...formCustomer,
@@ -32,58 +57,92 @@ const LoginCustomer = () => {
             [e.target.name]: e.target.value,
         })
     }
-    const onClick = () => {
-        if (togledUser) {
-            setFormCustomer({
-                email: '',
-                password: '',
-                role: 'customer'
+
+    const validateCustomer = (values) => {
+        const errors = {};
+        const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!values.email) {
+            errors.email = "Email is required";
+        } else if (!regex.test(values.email)) {
+            errors.email = "Email address is invalid";
+        }
+        if (!values.password) {
+            errors.password = "Password is required";
+        } else if (values.password.length < 6) {
+            errors.password = "Password must be more than 6 characters";
+        }
+        return errors;
+    }
+    const validateSeller = (values) => {
+        const errors = {};
+        const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!values.email) {
+            errors.email = "Email is required";
+        } else if (!regex.test(values.email)) {
+            errors.email = "Email address is invalid";
+        }
+        if (!values.password) {
+            errors.password = "Password is required";
+        } else if (values.password.length < 6) {
+            errors.password = "Password must be more than 6 characters";
+        }
+        return errors;
+    }
+    const handleClickCustomer = (resultValidate) => {
+        if (Object.keys(resultValidate).length === 0) {
+            setLoading(true)
+            console.log(formCustomer)
+            axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/customer`,
+            {
+                email: formCustomer.email,
+                password: formCustomer.password
             })
-            setTogledUser(false)
-            setTogledSeller(true)
-        } else {
-            setFormSeller({
-                email: '',
-                password: '',
-                role: 'seller'
+            .then((res) => {
+                console.log(res)
+                alert(res.data.message)
+                setLoading(false)
             })
-            setTogledUser(true)
-            setTogledSeller(false)
+            .catch((err) => {
+                console.log(err.response)
+                alert(err.response.data.message)
+                setLoading(false)
+            })
         }
     }
-    const handleClickCustomer = () => {
-        setLoading(true)
-        console.log(formCustomer)
-        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/customer`,
-        {
-            email: formCustomer.email,
-            password: formCustomer.password
-        })
-        .then((res) => {
-            setLoading(false)
-            alert(res.data.message)
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    const handleClickSeller = (resultValidate) => {
+        if (Object.keys(resultValidate).length === 0) {
+            setLoading(true)
+            console.log(formCustomer)
+            axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/seller`,
+            {
+                email: formSeller.email,
+                password: formSeller.password
+            })
+            .then((res) => {
+                alert(res.data.message)
+                console.log(res)
+                setLoading(false)
+            })
+            .catch((err) => {
+                console.log(err.response)
+                alert(err.response.data.message)
+                setLoading(false)
+            })
+        }
     }
-    const handleClickSeller = () => {
-        setLoading(true)
+    const handleSubmitCustomer = (e) => {
+        e.preventDefault();
+        const resultValidate = validateCustomer(formCustomer)
+        setFormErrorCustomer(resultValidate);
+        handleClickCustomer(resultValidate);
         console.log(formCustomer)
-        axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/login/seller`,
-        {
-            email: formSeller.email,
-            password: formSeller.password
-        })
-        .then((res) => {
-            setLoading(false)
-            alert(res.data.message)
-            console.log(res)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    }
+    const handleSubmitSeller = (e) => {
+        e.preventDefault();
+        const resultValidate = validateSeller(formSeller)
+        setFormErrorSeller(resultValidate);
+        handleClickSeller(resultValidate);
+        console.log("isi dari", formSeller)
     }
     return (
         <Fragment>
@@ -92,54 +151,51 @@ const LoginCustomer = () => {
                 <div onClick={onClick} className={togledUser ? "user-pointer bg-danger text-white px-3 py-3 border" : "user-pointer bg-transparent px-3 py-3 border"}>Customer</div>
                 <div onClick={onClick} className={togledSeller ? "user-pointer bg-danger text-white px-4 py-3 border" : "user-pointer bg-transparent px-4 py-3 border"}>Seller</div>
             </div>
-            <div className="text-center d-flex flex-column justify-content-center align-items-center">
-                {togledUser ? (
-                    <>
-                        <Input
-                            className="mt-3 w-50 py-2"
-                            type="text"
-                            name="email"
-                            onChange={handleChangeCustomer}
-                            value={formCustomer.email}
-                            placeholder="Email" />
-                        <Input
-                            className="mt-3 w-50 py-2"
-                            type="password"
-                            name="password"
-                            onChange={handleChangeCustomer}
-                            value={formCustomer.password}
-                            placeholder="Password" />
-                        <div className="forgot-password align-self-end"><Link to={"/auth/forgot-pass"} style={{ textDecoration: 'none' }} className="text-danger">Forgot Password?</Link></div>
-                        <Button
-                            className="btn-danger bg-gradient rounded-pill w-50 py-3"
-                            onClick={handleClickCustomer}>Login</Button>
-                    </>
-                ) : (
-                    <>
-                        <Input
-                            className="mt-3 w-50 py-2"
-                            type="text"
-                            name="email"
-                            onChange={handleChangeSeller}
-                            value={formSeller.email}
-                            placeholder="Email" />
-                        <Input
-                            className="mt-3 w-50 py-2"
-                            type="password"
-                            name="password"
-                            onChange={handleChangeSeller}
-                            value={formSeller.password}
-                            placeholder="Password" />
-                        <div className="forgot-password align-self-end"><Link to={"/auth/forgot-pass"} style={{ textDecoration: 'none' }} className="text-danger">Forgot Password?</Link></div>
-                        <Button
-                            className="btn-danger bg-gradient rounded-pill w-50 py-3"
-                            onClick={handleClickSeller}>Login</Button>
-                    </>
-                )}
-
-                <div className="mt-3">Don't have a Tokopedia account? <Link to={"/auth/register"} className="text-danger" style={{ textDecoration: 'none' }}>Register</Link></div>
-            </div>
-        </Fragment>
+            {togledUser ? (
+                <div className="text-center d-flex flex-column justify-content-center align-items-center">
+                    <Input
+                        className="mt-3 w-50 py-2"
+                        type="text"
+                        name="email"
+                        onChange={handleChangeCustomer}
+                        value={formCustomer.email}
+                        placeholder="Email" />
+                    <div className="text-danger mb-0">{formErrorCustomer.email}</div>
+                    <Input
+                        className="mt-3 w-50 py-2"
+                        type="password"
+                        name="password"
+                        onChange={handleChangeCustomer}
+                        value={formCustomer.password}
+                        placeholder="Password" />
+                    <div className="text-danger mb-0">{formErrorCustomer.password}</div>
+                    <div className="forgot-password align-self-end"><Link to={"/auth/forgot-pass"} style={{ textDecoration: 'none' }} className="text-danger">Forgot Password?</Link></div>
+                    <Button isLoading={loading} className="btn-danger bg-gradient rounded-pill w-50 py-3" onClick={handleSubmitCustomer}>Login</Button>
+                </div>
+            ) : (
+                <div className="text-center d-flex flex-column justify-content-center align-items-center">
+                    <Input
+                        className="mt-3 w-50 py-2"
+                        type="text"
+                        name="email"
+                        onChange={handleChangeSeller}
+                        value={formSeller.email}
+                        placeholder="Email" />
+                    <div className="text-danger mb-0">{formErrorSeller.email}</div>
+                    <Input
+                        className="mt-3 w-50 py-2"
+                        type="password"
+                        name="password"
+                        onChange={handleChangeSeller}
+                        value={formSeller.password}
+                        placeholder="Password" />
+                    <div className="text-danger mb-0">{formErrorSeller.password}</div>
+                    <div className="forgot-password align-self-end"><Link to={"/auth/forgot-pass"} style={{ textDecoration: 'none' }} className="text-danger">Forgot Password?</Link></div>
+                    <Button isLoading={loading} className="btn-danger bg-gradient rounded-pill w-50 py-3" onClick={handleSubmitSeller}>Login</Button>
+                </div>
+            )}
+            <div className="text-center mt-3">Don't have a Tokopedia account? <Link to={"/auth/register"} className="text-danger" style={{ textDecoration: 'none' }}>Register</Link></div>
+        </Fragment >
     )
 };
 

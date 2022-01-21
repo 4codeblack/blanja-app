@@ -4,26 +4,17 @@ import "./checkout.css"
 import Navbar from "../../../components/module/Navbar"
 import Button from '../../../components/base/Button';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 
 const Checkout = () => {
-  // const [modal, setModal] = useState(false)
-
-  // const handleModal = () => {
-  //   if (!modal) {
-  //     setModal(true)
-  //   }
-  // }
-
-  // const handleCloseModal = () => {
-  //   if (modal) {
-  //     setModal(false)
-  //   }
-  // }
-
   const [modal, setModal] = useState(false);
+  const [modalAddress, setModalAddress] = useState(false);
 
   const handleCloseModal = () => setModal(false);
   const handleModal = () => setModal(true);
+
+  const handleCloseModalAddress = () => setModalAddress(false);
+  const handleModalAddress = () => setModalAddress(true);
 
   return (
     <div className='d-flex flex-column wrapper'>
@@ -34,9 +25,9 @@ const Checkout = () => {
           <p className='mt-2'>Shipping Address</p>
           <div className='box shadow-sm p-3 rounded'>
             <div className='d-flex flex-column justify-content-between'>
-              <p>Andreas Jane</p>
+              <p className='fw-bold'>Andreas Jane</p>
               <p>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
-              <Button className='btn-address p-1 bg-white border fw-light'>Choose another address</Button>
+              <Button className='btn-address p-1 bg-white border fw-light' onClick={handleModalAddress}>Choose another address</Button>
             </div>
           </div>
           <div className='box shadow-sm p-3 mt-2 rounded'>
@@ -68,20 +59,72 @@ const Checkout = () => {
               <p className=''>Shopping Summary</p>
               <p className='text-danger'>Total</p>
             </div>
-            <Button className='button w-100 border-0 p-1 text-white' onClick={handleModal}>Select Payment</Button>
+            <Button className='bg-danger w-100 border-0 p-1 text-white rounded-pill' onClick={handleModal}>Select Payment</Button>
           </div>
+
+          {/* modal */}
           <div>
             <Modal isOpen={modal}
               onRequestClose={handleModal}
-              contentLabel="My dialog">
-              <div>My modal dialog.</div>
-              <button onClick={handleCloseModal}>Close modal</button>
+              onHide={handleCloseModal}
+              className="modal-style"
+              overlayClassName="overlay"
+            >
+              <div className='navbar justify-content-start'>
+                <Button class='bg-white fw-light btn-close p-3' onClick={handleCloseModal} type="button" aria-label="Close">
+                </Button>
+                <span className='h5 mt-1 fw-normal'>Payment</span>
+              </div>
+              <div className='p-3'>
+                <p>Payment method</p>
+              </div>
+              <hr></hr>
+              <div className='p-3'>
+                <p>Shopping Summary</p>
+                <div className='price d-flex flex-row justify-content-between'>
+                  <span className='fw-light'>Order</span>
+                  <span>Total</span>
+                </div>
+                <div className='price d-flex flex-row justify-content-between mt-1'>
+                  <span className='fw-light'>Delivery</span>
+                  <span>Total</span>
+                </div>
+              </div>
+              <div className='footer navbar p-3 d-flex flex-row justify-content-between'>
+                <div className='d-flex flex-column'>
+                  <span>Shopping summary</span>
+                  <span className='text-danger'>Total</span>
+                </div>
+                <Button className='bg-danger border-0 p-1 text-white btn-address' onClick={handleModal}>Buy</Button>
+              </div>
+
+            </Modal>
+            <Modal isOpen={modalAddress}
+              onRequestClose={handleModalAddress}
+              onHide={handleCloseModalAddress}
+              className="modal-style-address"
+              overlayClassName="overlay"
+            >
+              <Button class='float-end bg-white fw-light btn-close p-3' onClick={handleCloseModalAddress} type="button" aria-label="Close">
+
+              </Button>
+              <div className='p-4'>
+                <h5 className='text-center mt-2'>Choose another address</h5>
+                <Button className='add-new w-100 bg-white p-4 my-3 fw-light rounded'>Add new address</Button>
+                <div className='box p-3 rounded border border-danger'>
+                  <div className='d-flex flex-column justify-content-between'>
+                    <p className='fw-bold'>Andreas Jane</p>
+                    <p>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
+                    <Link to="/" className='text-decoration-none text-danger fw-bold'>Change address</Link>
+                  </div>
+                </div>
+              </div>
             </Modal>
           </div>
-
         </div>
       </div>
     </div >
+
   );
 };
 

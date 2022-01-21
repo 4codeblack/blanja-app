@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import promo from "../../../assets/img/promotion-card.png";
+// import promo from "../../../assets/img/promotion-card.png";
 import "./home.css";
 
 const Home = () => {

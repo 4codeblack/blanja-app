@@ -1,32 +1,3 @@
-.wrapper {
-  height: 100vh;
-}
-
-.left-side {
-  width: 70%;
-}
-
-.right-side {
-  width: 30%;
-}
-
-.button {
-  background-color: #DB3022!important;
-  border-radius: 50px;
-}
-
-.text-danger {
-  color: #DB3022!important;
-}
-
-.btn-minus {
-  background: #D4D4D4!important;
-}
-
-.fw-light {
-  color: #9B9B9B;
-}
-
 * {
   padding: 0;
   margin: 0;

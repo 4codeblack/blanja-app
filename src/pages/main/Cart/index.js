@@ -103,7 +103,7 @@ const Cart = () => {
               <p className='fw-light'>Total price</p>
               <p>Total</p>
             </div>
-            <Button className='button w-100 border-0 p-1 text-white' onClick={handleBuy}>Buy</Button>
+            <Button className='bg-danger w-100 border-0 p-1 text-white' onClick={handleBuy}>Buy</Button>
           </div>
         </div>
       </div>

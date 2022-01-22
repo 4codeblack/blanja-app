@@ -1,3 +1,11 @@
 .sidebar-menu {
     height: 100vh;
 }
+.vertical-line {
+    border-left: 1px solid #D4D4D4;
+    height: 250px;
+}
+.desc-box {
+    width: 700px;
+    height: 200px
+}

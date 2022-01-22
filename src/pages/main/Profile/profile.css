@@ -17,3 +17,6 @@
 .user-pointer {
     cursor: pointer;
 }
+.validate-error {
+    margin: 0px 170px !important;
+}

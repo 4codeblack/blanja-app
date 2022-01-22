@@ -37,7 +37,7 @@ const Profile = () => {
 
   return (
     <Fragment>
-      <div className="d-flex">
+      <div className="d-flex min-vh-100">
         <div className="w-25 sidebar-menu">
           <div className=" ms-5 mt-5 d-flex flex-column">
             <div className="d-flex mb-5">

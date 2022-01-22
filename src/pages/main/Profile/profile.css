@@ -9,3 +9,11 @@
     width: 700px;
     height: 200px
 }
+.table-layout {
+    table-layout: fixed;
+    width: 100px;
+    height: 500px;
+}
+.user-pointer {
+    cursor: pointer;
+}

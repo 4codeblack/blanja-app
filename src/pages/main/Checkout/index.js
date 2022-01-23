@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "../../../App.css";
 import "./checkout.css"
-import Navbar from "../../../components/module/Navbar"
 import Button from '../../../components/base/Button';
 import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,6 @@ const Checkout = () => {
 
   return (
     <div className='d-flex flex-column wrapper'>
-      <Navbar></Navbar>
       <div className='container d-flex h-100 mt-4'>
         <div className='flex-column d-flex p-2 mx-3 left-side'>
           <h3 className='fw-bold'>Checkout</h3>
@@ -57,9 +55,9 @@ const Checkout = () => {
             <hr />
             <div className='price d-flex flex-row justify-content-between'>
               <p className=''>Shopping Summary</p>
-              <p className='text-danger'>Total</p>
+              <p className='text-red'>Total</p>
             </div>
-            <Button className='bg-danger w-100 border-0 p-1 text-white rounded-pill' onClick={handleModal}>Select Payment</Button>
+            <Button className='bg-red w-100 border-0 p-1 text-white rounded-pill' onClick={handleModal}>Select Payment</Button>
           </div>
 
           {/* modal */}
@@ -93,9 +91,9 @@ const Checkout = () => {
               <div className='footer navbar p-3 d-flex flex-row justify-content-between'>
                 <div className='d-flex flex-column'>
                   <span>Shopping summary</span>
-                  <span className='text-danger'>Total</span>
+                  <span className='text-red'>Total</span>
                 </div>
-                <Button className='bg-danger border-0 p-1 text-white btn-address' onClick={handleModal}>Buy</Button>
+                <Button className='bg-red border-0 p-1 text-white btn-address' onClick={handleModal}>Buy</Button>
               </div>
 
             </Modal>
@@ -115,7 +113,7 @@ const Checkout = () => {
                   <div className='d-flex flex-column justify-content-between'>
                     <p className='fw-bold'>Andreas Jane</p>
                     <p>Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja, Kab. Banyumas, 53181</p>
-                    <Link to="/" className='text-decoration-none text-danger fw-bold'>Change address</Link>
+                    <Link to="/" className='text-decoration-none text-red fw-bold'>Change address</Link>
                   </div>
                 </div>
               </div>

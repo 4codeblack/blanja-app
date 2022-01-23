@@ -21,11 +21,11 @@ button {
   width: 30%;
 }
 
-.bg-danger {
+.bg-red {
   background-color: #DB3022!important;
 }
 
-.text-danger {
+.text-red {
   color: #DB3022!important;
 }
 
@@ -36,3 +36,4 @@ button {
 .fw-light {
   color: #9B9B9B;
 }
+

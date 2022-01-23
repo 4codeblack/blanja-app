@@ -8,3 +8,32 @@ button {
   border: 0;
   outline: 0;
 }
+
+.wrapper {
+  height: 100vh;
+}
+
+.left-side {
+  width: 70%;
+}
+
+.right-side {
+  width: 30%;
+}
+
+.bg-red {
+  background-color: #DB3022!important;
+}
+
+.text-red {
+  color: #DB3022!important;
+}
+
+.btn-minus {
+  background: #D4D4D4!important;
+}
+
+.fw-light {
+  color: #9B9B9B;
+}
+

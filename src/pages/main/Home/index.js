@@ -4,22 +4,24 @@ import Slider from "../../../components/module/CarouselPromo/Slider";
 import CarouselCategory from "../../../components/module/CarouselCategory";
 import Cards from "../../../components/module/Cards";
 import "./home.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("https://blanja-backend.herokuapp.com/customer/all-product")
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/all-product`)
       .then((res) => {
         console.info(res.data);
         const result = res.data.data;
         setProducts(result);
-        console.log(result);
       })
       .catch((err) => {
         console.log(err.response);
       });
   }, []);
+
   return (
     <Fragment>
       <section className="slider d-flex flex-column">
@@ -53,6 +55,7 @@ const Home = () => {
                 productName={product.Name}
                 productPrice={product.price}
                 storeName={product.namestore}
+                onClick={() => navigate(`/main/page-product/${product.id}`)}
               />
             ))}
           </section>
@@ -73,6 +76,7 @@ const Home = () => {
                 productName={product.Name}
                 productPrice={product.price}
                 storeName={product.namestore}
+                onClick={() => navigate(`/main/page-product/${products.id}`)}
               />
             ))}
           </section>

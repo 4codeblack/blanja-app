@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as FiIcons from "react-icons/fi";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
@@ -10,7 +11,10 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [click, setClick] = useState(true);
+  const navigate = useNavigate();
+
   const handleClick = () => setClick(!click);
+  const toProfilePage = () => navigate("/main/profile/account");
   return (
     <Fragment>
       <div className="navbar d-flex justify-content-around align-items-center">
@@ -38,10 +42,15 @@ const Navbar = () => {
 
         {click ? (
           <div className="navbar-right d-flex align-items-center">
-            <FiIcons.FiShoppingCart className="navbar-icons  me-3" />
-            <FiIcons.FiBell className="navbar-icons ms-3 me-3" />
-            <BiIcons.BiEnvelope className="navbar-icons ms-3 me-3" />
-            <img className="ms-3" src={profile} alt="Profile" />
+            <FiIcons.FiShoppingCart className="navbar-icons cart me-3" />
+            <FiIcons.FiBell className="navbar-icons notif ms-3 me-3" />
+            <BiIcons.BiEnvelope className="navbar-icons chat ms-3 me-3" />
+            <img
+              onClick={toProfilePage}
+              className="navbar-profile ms-3"
+              src={profile}
+              alt="Profile"
+            />
           </div>
         ) : (
           <div className="navbar-right d-flex align-items-center">

@@ -46,6 +46,7 @@
 }
 .navbar-logo,
 .filter-icon,
-.navbar-icons {
+.navbar-icons,
+.navbar-profile {
   cursor: pointer;
 }

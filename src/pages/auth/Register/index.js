@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from '../../../components/base/Button';
 import Input from '../../../components/base/Input';
@@ -11,6 +11,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false)
     const [formErrorCustomer, setFormErrorCustomer] = useState({})
     const [formErrorSeller, setFormErrorSeller] = useState({})
+    const navigate = useNavigate()
 
     const [formCustomer, setFormCustomer] = useState({
         name: '',
@@ -112,7 +113,6 @@ const Register = () => {
     const handleClickCustomer = (resultValidate) => {
         if (Object.keys(resultValidate).length === 0) {
             setLoading(true)
-            console.log("dari formcustomer", formCustomer)
             axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/register/customer`,
                 {
                     name: formCustomer.name,
@@ -121,8 +121,8 @@ const Register = () => {
                 })
                 .then((res) => {
                     setLoading(false)
-                    alert(res.data.message)
-                    console.log(res)
+                    console.log(res.data.message)
+                    navigate("/")
                 })
                 .catch((err) => {
                     console.log(err)
@@ -132,7 +132,6 @@ const Register = () => {
     const handleClickSeller = (resultValidate) => {
         if (Object.keys(resultValidate).length === 0) {
             setLoading(true)
-            console.log("isi form seller", formSeller)
             axios.post(`${process.env.REACT_APP_URL_BACKEND}auth/register/seller`,
                 {
                     name: formSeller.name,
@@ -143,8 +142,8 @@ const Register = () => {
                 })
                 .then((res) => {
                     setLoading(false)
-                    alert(res.data.message)
-                    console.log(res)
+                    console.log(res.data.message)
+                    navigate("/")
                 })
                 .catch((err) => {
                     console.log(err)
@@ -156,14 +155,12 @@ const Register = () => {
         const resultValidate = validateCustomer(formCustomer)
         setFormErrorCustomer(resultValidate);
         handleClickCustomer(resultValidate);
-        console.log(formCustomer)
     }
     const handleSubmitSeller = (e) => {
         e.preventDefault();
         const resultValidate = validateSeller(formSeller)
         setFormErrorSeller(resultValidate);
         handleClickSeller(resultValidate);
-        console.log("isi dari", formSeller)
     }
     return (
         <Fragment>
@@ -245,7 +242,7 @@ const Register = () => {
                     <Button isLoading={loading} onClick={handleSubmitSeller} className="btn-danger bg-gradient rounded-pill w-50 py-3 mt-5">Register</Button>
                 </div>
             )}
-            <div className="text-center mt-3 mb-5">Already have a Tokopedia account? <Link to={"/auth/login"} className="text-danger" style={{ textDecoration: 'none' }}>Login</Link></div>
+            <div className="text-center mt-3 mb-5">Already have a Blanja account? <Link to={"/auth/login"} className="text-danger" style={{ textDecoration: 'none' }}>Login</Link></div>
         </Fragment>
     )
 };

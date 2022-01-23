@@ -1,0 +1,33 @@
+.rec.rec-arrow {
+  background-color: #fff;
+  text-align: center;
+  font-size: 1em !important;
+  color: #9b9b9b !important;
+}
+.rec.rec-arrow:hover:enabled,
+.rec.rec-arrow:focus:enabled {
+  background-color: #db3022;
+}
+.rec.rec-arrow-left {
+  position: relative;
+  left: -34%;
+  margin-top: 5em;
+}
+.rec.rec-arrow-right {
+  position: relative;
+  right: 117%;
+  margin-top: 5em;
+}
+button.rec-dot {
+  width: 8px;
+  height: 8px;
+  outline: none;
+  background-color: #d7d9e1;
+  box-shadow: 0 0 1px 1px #d7d9e1;
+}
+button.rec-dot:hover,
+button.rec-dot:active,
+button.rec-dot:focus {
+  background-color: #db3022;
+  box-shadow: 0 0 1px 1px #d7d9e1;
+}

@@ -120,7 +120,7 @@ const LoginCustomer = () => {
           const result = res.data.data[0];
           const customerId = result.id;
           localStorage.setItem("auth", "1");
-          localStorage.setItem("userId", JSON.stringify(customerId));
+          localStorage.setItem("customerId", JSON.stringify(customerId));
           console.log(res.data.message);
           setLoading(false);
           setMessageResponse("");
@@ -145,7 +145,7 @@ const LoginCustomer = () => {
           const result = res.data.data[0];
           const sellerId = result.id;
           localStorage.setItem("auth", "1");
-          localStorage.setItem("userId", JSON.stringify(sellerId));
+          localStorage.setItem("sellerId", JSON.stringify(sellerId));
           console.log(res.data.message);
           setLoading(false);
           setMessageResponse("");

@@ -6,6 +6,7 @@
   background: #ffffff;
   box-shadow: 0px 0px 14px rgba(173, 173, 173, 0.25);
   border-radius: 12px !important;
+  cursor: pointer;
 }
 .card img {
   object-fit: cover;

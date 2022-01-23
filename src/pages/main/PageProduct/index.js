@@ -22,13 +22,14 @@ const PageProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}customer/product/113308`)
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/product/${id}`)
       .then((res) => {
         const result = res.data.data[0];
         setProduct(result);
         console.log(result);
       })
       .catch((err) => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleBuy = () => {

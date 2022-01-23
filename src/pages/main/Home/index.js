@@ -9,7 +9,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get("https://blanja-backend.herokuapp.com/customer/all-product")
+      .get(`${process.env.REACT_APP_URL_BACKEND}/customer/all-product`)
       .then((res) => {
         console.info(res.data);
         const result = res.data.data;

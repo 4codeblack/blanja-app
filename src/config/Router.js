@@ -21,13 +21,13 @@ const Router = () => {
                     <Route path="reset-pass" element={<ResetPass />} />
                     <Route path="conf-login" element={<ConfLogin />} />
                 </Route>
-              <Route index element={<Navigate to={"/main"} />} />
-                  <Route path={"/main"} element={<Main />}>
-                  <Route index element={<Home />} />
-          </Route>
-          <Route path={"/*"} element={<Page404 />} />
+                <Route index element={<Navigate to={"/main"} />} />
+                <Route path={"/main"} element={<Main />}>
+                    <Route index element={<Home />} />
+                </Route>
+                <Route path={"/*"} element={<Page404 />} />
             </Routes>
         </BrowserRouter>
     )
-
+}
 export default Router;

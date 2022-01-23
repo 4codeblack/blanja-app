@@ -14,25 +14,27 @@ const PageProduct = () => {
         price: '',
         qty: '',
         condition: '',
-        photo: ''
+        photo1: ''
     })
     const {id} = useParams()
     const navigate = useNavigate()
     const [num, setNum] = useState(1)
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get(`${process.env.REACT_APP_URL_BACKEND}customer/product/113308`)
-        .then((res)=>{
-            const result = res.data.data[0]
-            setProduct(result)
-            console.log(result);
-        })
-        .catch((err)=>{
-        })
+            .then((res) => {
+                const result = res.data.data[0]
+                setProduct(result)
+                console.log(result);
+                console.log(id);
+            })
+            .catch((err) => {
+            })
     }, [])
 
     const handleBuy = () => {
         navigate("/main/cart")
+        localStorage.setItem('item', JSON.stringify([product]))
     }
 
     const handleIncrement = () => {
@@ -53,10 +55,10 @@ const PageProduct = () => {
                 <p className='fw-light'>Home &gt; Category &gt; Shoes</p>
                 <div className='d-flex flex-row mt-3'>
                     <div className='d-flex w-50 flex-wrap justify-content-around'>
-                    <img className='' src={shoe} alt="" />
-                    <img className='' src={shoe} alt="" />
-                    <img className='' src={shoe} alt="" />
-                    <img className='' src={shoe} alt="" />
+                        <img className='' src={product.photo1} alt="" />
+                        <img className='' src={product.photo2} alt="" />
+                        <img className='' src={product.photo3} alt="" />
+                        <img className='' src={product.photo4} alt="" />
                         {/* <div className=''>
                             <img className='' src={shoe} alt="" />
                             <img className='mx-3' src={shoe} alt="" />
@@ -109,7 +111,6 @@ const PageProduct = () => {
                 <hr></hr>
                 <p className='h3 mt-4'>You can also like this</p>
                 <p className='m-0 fw-light'>You’ve never seen it before!</p>
-                {/* <Card></Card> */}
             </div>
 
         </div>

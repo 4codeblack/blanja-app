@@ -15,6 +15,9 @@ const Checkout = () => {
   const handleCloseModalAddress = () => setModalAddress(false);
   const handleModalAddress = () => setModalAddress(true);
 
+  const cartItem = JSON.parse(localStorage.getItem("item"));
+  const cartTotal = JSON.parse(localStorage.getItem("total-item"));
+
   return (
     <div className='d-flex flex-column wrapper'>
       <div className='container d-flex h-100 mt-4'>
@@ -28,34 +31,39 @@ const Checkout = () => {
               <Button className='btn-address p-1 bg-white border fw-light' onClick={handleModalAddress}>Choose another address</Button>
             </div>
           </div>
-          <div className='box shadow-sm p-3 mt-2 rounded'>
-            <div className='d-flex flex-row justify-content-between'>
-              <div className='d-flex flex-row'>
-                <img className='mx-2' src="" alt="product"></img>
-                <div>
-                  <p className='m-0'>nama product</p>
-                  <span className='fw-light'>merk</span>
+          {cartItem.map((product, index) => {
+            return (
+              <div className='box shadow-sm p-3 mt-2 rounded'>
+                <div className='d-flex flex-row justify-content-between'>
+                  <div className='d-flex flex-row'>
+                    <img className='mx-2' src="" alt="product"></img>
+                    <div>
+                      <p className='m-0'>{product.Name}</p>
+                      <span className='fw-light'>{product.namestore}</span>
+                    </div>
+                  </div>
+                  <p className='mt-2'>{product.price}</p>
                 </div>
               </div>
-              <p className='mt-2'>price</p>
-            </div>
-          </div>
+            )
+          })}
         </div>
+
         <div className='right-side p-2'>
           <div className='box shadow-sm p-3 mt-5 rounded'>
             <p>Shopping Summary</p>
             <div className='price d-flex flex-row justify-content-between'>
               <span className='fw-light'>Order</span>
-              <span>Total</span>
+              <span>{cartTotal}</span>
             </div>
             <div className='price d-flex flex-row justify-content-between mt-1'>
               <span className='fw-light'>Delivery</span>
-              <span>Total</span>
+              <span>0</span>
             </div>
             <hr />
             <div className='price d-flex flex-row justify-content-between'>
               <p className=''>Shopping Summary</p>
-              <p className='text-red'>Total</p>
+              <p className='text-red'>{cartTotal}</p>
             </div>
             <Button className='bg-red w-100 border-0 p-1 text-white rounded-pill' onClick={handleModal}>Select Payment</Button>
           </div>
@@ -81,17 +89,17 @@ const Checkout = () => {
                 <p>Shopping Summary</p>
                 <div className='price d-flex flex-row justify-content-between'>
                   <span className='fw-light'>Order</span>
-                  <span>Total</span>
+                  <span>{cartTotal}</span>
                 </div>
                 <div className='price d-flex flex-row justify-content-between mt-1'>
                   <span className='fw-light'>Delivery</span>
-                  <span>Total</span>
+                  <span>0</span>
                 </div>
               </div>
               <div className='footer navbar p-3 d-flex flex-row justify-content-between'>
                 <div className='d-flex flex-column'>
                   <span>Shopping summary</span>
-                  <span className='text-red'>Total</span>
+                  <span className='text-red'>{cartTotal}</span>
                 </div>
                 <Button className='bg-red border-0 p-1 text-white btn-address' onClick={handleModal}>Buy</Button>
               </div>

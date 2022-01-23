@@ -8,32 +8,23 @@ const Cart = () => {
   const navigate = useNavigate()
   const handleBuy = () => {
     navigate("/main/checkout")
+    localStorage.setItem('total-item', JSON.stringify(total))
   }
-
-  const [cart, setCart] = useState([{
-    id: 1,
-    name: "nike",
-    price: 1000000,
-    qty: 1
-  }, {
-    id: 2,
-    name: "adidas",
-    price: 2500000,
-    qty: 1
-  }])
-
-
-  const [array, setArray] = useState([])
+  const cartItem = JSON.parse(localStorage.getItem("item"));
+  const [cart, setCart] = useState(cartItem)
+  console.log(cartItem);
 
   const [checkedState, setCheckedState] = useState(
     new Array(cart.length).fill(false)
   )
 
+  const getFormattedPrice = (price) => `${price.toFixed()}`;
+
   const [total, setTotal] = useState(0);
 
   const handleOnChange = (id) => {
     const updatedCheckedState = checkedState.map((item, index) =>
-      index + 1 === id ? !item : item
+      index === id ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
@@ -41,7 +32,7 @@ const Cart = () => {
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
         if (currentState === true) {
-          return sum + (cart[index].price * cart[index].qty);
+          return sum + cart[index].price;
         }
         return sum;
       },
@@ -50,22 +41,10 @@ const Cart = () => {
     setTotal(totalPrice)
   }
 
-  const handleCheckedValue = (e) => {
-    if (e.target.checked) {
-      let id = e.target.value;
-      setArray([...array, id])
-    }
-  }
-  console.log(array);
-
-
-
   const handleIncrement = (id) => {
     const index = cart.findIndex(item => item.id === id)
     let cartItem = cart[index]
     console.log(cartItem);
-    cartItem.qty++
-    updatecartItem()
     handleOnChange()
   }
 
@@ -73,20 +52,19 @@ const Cart = () => {
   const handleDecrement = (id) => {
     const index = cart.findIndex(item => item.id === id)
     let cartItem = cart[index]
-    if (cartItem.qty <= 0) {
-      cartItem.qty = 0;
+    if (cartItem.qty <= 1) {
+      cartItem.qty = 1;
     } else {
       cartItem.qty--
     }
-    updatecartItem()
     handleOnChange()
   };
 
-  const updatecartItem = () => {
-    setCart(cart)
-    console.log(cart);
-  }
 
+
+  const handleDelete = () => {
+    // localStorage.removeItem('item')
+  }
 
   return (
     <div className='d-flex flex-column wrapper'>
@@ -103,7 +81,7 @@ const Cart = () => {
                 <span className=''>Select all items</span>
                 <span className='mx-2 fw-light'>(... items selected)</span>
               </div>
-              <span className='text-red'>Delete</span>
+              <Button className='text-red bg-white' onClick={handleDelete}>Delete</Button>
             </div>
           </div>
 
@@ -112,19 +90,20 @@ const Cart = () => {
               <div className='box shadow-sm p-3 mt-2 rounded'>
                 <div className='d-flex flex-row justify-content-between'>
                   <div className='d-flex flex-row'>
-                  <Input 
-                      type="checkbox" 
-                      name={product.name} 
-                      value={product.id} 
+                    <Input
+                      type="checkbox"
+                      name={product.Name}
+                      value={product.id}
                       className="me-3 mt-3"
-                      onChange={(e) => { handleCheckedValue(e); handleOnChange(product.id) } }
+                      onChange={() => handleOnChange(index) }
                       defaultChecked={false}
-                      />
+                      checked={checkedState[index]}
+                    />
                     <img src="" alt=""></img>
                     <img className='mx-2' src="" alt=""></img>
                     <div>
-                      <p className='m-0'>{product.name}</p>
-                      <span className='fw-light'>{product.seller}</span>
+                      <p className='m-0'>{product.Name}</p>
+                      <span className='fw-light'>{product.namestore}</span>
                     </div>
                   </div>
                   <div className='d-flex flex-row my-2'>
@@ -144,7 +123,7 @@ const Cart = () => {
             <p>Shopping Summary</p>
             <div className='price d-flex flex-row justify-content-between'>
               <p className='fw-light'>Total price</p>
-              <p>{total}</p>
+              <p>{getFormattedPrice(total)}</p>
             </div>
             <Button className='bg-red w-100 border-0 p-1 text-white rounded-pill' onClick={handleBuy}>Buy</Button>
           </div>

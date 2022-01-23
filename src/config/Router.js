@@ -28,7 +28,7 @@ const Router = () => {
                   <Route path={"/main"} element={<Main />}>
                   <Route path="cart" element={<Cart />} />
                   <Route path="checkout" element={<Checkout />} />
-                  <Route path="page-product" element={<PageProduct />} />
+                  <Route path="page-product:id" element={<PageProduct />} />
                   <Route index element={<Home />} />
           </Route>
           <Route path={"/*"} element={<Page404 />} />

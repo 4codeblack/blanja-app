@@ -7,10 +7,17 @@ import profile from "../../../assets/img/profile-picture.png";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import "./navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [click, setClick] = useState(true);
   const handleClick = () => setClick(!click);
+  const navigate = useNavigate()
+
+  const handleCart = () => {
+    navigate('/main/cart')
+  }
+
   return (
     <Fragment>
       <div className="navbar d-flex justify-content-around align-items-center">
@@ -38,7 +45,7 @@ const Navbar = () => {
 
         {click ? (
           <div className="navbar-right d-flex align-items-center">
-            <FiIcons.FiShoppingCart className="navbar-icons  me-3" />
+            <FiIcons.FiShoppingCart className="navbar-icons  me-3" onClick={handleCart}/>
             <FiIcons.FiBell className="navbar-icons ms-3 me-3" />
             <BiIcons.BiEnvelope className="navbar-icons ms-3 me-3" />
             <img className="ms-3" src={profile} alt="Profile" />

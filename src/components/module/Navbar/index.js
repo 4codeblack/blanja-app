@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import * as FiIcons from "react-icons/fi";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
@@ -10,20 +10,20 @@ import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const [click, setClick] = useState(true);
-  const handleClick = () => setClick(!click);
-  const navigate = useNavigate()
+  let auth = localStorage.getItem("auth");
+  const navigate = useNavigate();
 
-  const handleCart = () => {
-    navigate('/main/cart')
-  }
+  const toHomePage = () => navigate("/main");
+  const toCart = () => navigate("/main/cart");
+  const logIn = () => navigate("/auth/login");
+  const signUp = () => navigate("/auth/register");
 
   return (
     <Fragment>
       <div className="navbar d-flex justify-content-around align-items-center">
         <div className="navbar-left d-flex justify-content-around align-items-center">
           <img
-            onClick={handleClick}
+            onClick={toHomePage}
             className="navbar-logo me-5 mb-2"
             src={logo}
             alt="Blanja"
@@ -43,9 +43,12 @@ const Navbar = () => {
           </div>
         </div>
 
-        {click ? (
+        {auth === "1" ? (
           <div className="navbar-right d-flex align-items-center">
-            <FiIcons.FiShoppingCart className="navbar-icons  me-3" onClick={handleCart}/>
+            <FiIcons.FiShoppingCart
+              className="navbar-icons  me-3"
+              onClick={toCart}
+            />
             <FiIcons.FiBell className="navbar-icons ms-3 me-3" />
             <BiIcons.BiEnvelope className="navbar-icons ms-3 me-3" />
             <img className="ms-3" src={profile} alt="Profile" />
@@ -53,8 +56,12 @@ const Navbar = () => {
         ) : (
           <div className="navbar-right d-flex align-items-center">
             <FiIcons.FiShoppingCart className="navbar-icons  me-3" />
-            <Button className="navbar-btn-login ms-3 me-3">Login</Button>
-            <Button className="navbar-btn-signup">Signup</Button>
+            <Button onClick={logIn} className="navbar-btn-login ms-3 me-3">
+              Login
+            </Button>
+            <Button onClick={signUp} className="navbar-btn-signup">
+              Signup
+            </Button>
           </div>
         )}
       </div>

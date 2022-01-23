@@ -3,10 +3,10 @@ import * as AiIcons from "react-icons/ai";
 import suit from "../../../assets/img/suit.png";
 import "./cards.css";
 
-const Cards = ({ ...props }) => {
+const Cards = ({ onClick, ...props }) => {
   return (
     <Fragment>
-      <div className="card ">
+      <div onClick={onClick} className="card ">
         <img src={suit} className="card-img-top" alt="product" />
         <div className="card-body">
           <h5 className="product-name">{props.productName}</h5>

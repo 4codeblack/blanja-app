@@ -1,0 +1,69 @@
+/* Styling for Sidebar Customer Profile */
+.sidebar-profile {
+  margin: 2.3em 0 2em 8em;
+  height: 100px;
+  width: auto;
+}
+
+/* Profile Manage section */
+.picture-wrapper {
+  object-fit: cover;
+}
+.profile-picture {
+  border-radius: 50%;
+}
+.profile-name {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222222;
+}
+.editor-icon,
+.editor-text {
+  color: #9b9b9b;
+}
+.editor-text {
+  font-size: 0.9em;
+}
+.profile-editor {
+  cursor: pointer;
+}
+/* Menu items section */
+.menu-items {
+  cursor: pointer;
+  margin-left: 8em;
+}
+.menu-icons {
+  color: #fff;
+  font-size: 1.05em;
+  font-weight: bold;
+}
+.icons-wrapper {
+  padding: 0.6em;
+  margin-right: 1em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-item-blue {
+  background-color: #456bf3;
+}
+.bg-item-orange {
+  background-color: #f36f45;
+}
+.bg-item-pink {
+  background-color: #f3456f;
+}
+.bg-item-purple {
+  background-color: rgb(209, 82, 209);
+}
+.menu-title {
+  font-weight: normal;
+  font-size: 0.97em;
+  line-height: 24px;
+  color: #9b9b9b;
+}
+.menu-title:hover {
+  color: #222222;
+}

@@ -9,7 +9,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_URL_BACKEND}/customer/all-product`)
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/all-product`)
       .then((res) => {
         console.info(res.data);
         const result = res.data.data;

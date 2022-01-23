@@ -33,7 +33,7 @@ const Router = () => {
           <Route index element={<Home />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="page-product" element={<PageProduct />} />
+          <Route path="page-product/:id" element={<PageProduct />} />
         </Route>
 
         <Route path={"/*"} element={<Page404 />} />

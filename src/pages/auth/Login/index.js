@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "../../../components/base/Button";
 import Input from "../../../components/base/Input";
@@ -12,6 +12,7 @@ const LoginCustomer = () => {
   const [formErrorCustomer, setFormErrorCustomer] = useState({});
   const [formErrorSeller, setFormErrorSeller] = useState({});
   const [messageResponse, setMessageResponse] = useState("");
+  const navigate = useNavigate();
 
   const [formCustomer, setFormCustomer] = useState({
     email: "",
@@ -91,51 +92,7 @@ const LoginCustomer = () => {
     }
     return errors;
   };
-  const handleClickCustomer = (resultValidate) => {
-    if (Object.keys(resultValidate).length === 0) {
-      setLoading(true);
-      console.log(formCustomer);
-      axios
-        .post(`${process.env.REACT_APP_URL_BACKEND}auth/login/customer`, {
-          email: formCustomer.email,
-          password: formCustomer.password
-        })
-        .then((res) => {
-          console.log(res);
-          alert(res.data.message);
-          setLoading(false);
-          setMessageResponse("");
-        })
-        .catch((err) => {
-          console.log(err.response);
-          setLoading(false);
-          setMessageResponse(err.response.data.message);
-        });
-    }
-  };
-  const handleClickSeller = (resultValidate) => {
-    if (Object.keys(resultValidate).length === 0) {
-      setLoading(true);
-      console.log(formCustomer);
-      axios
-        .post(`${process.env.REACT_APP_URL_BACKEND}auth/login/seller`, {
-          email: formSeller.email,
-          password: formSeller.password
-        })
-        .then((res) => {
-          alert(res.data.message);
-          console.log(res);
-          setLoading(false);
-          setMessageResponse("");
-        })
-        .catch((err) => {
-          console.log(err.response);
-          setLoading(false);
-          setMessageResponse(true);
-          setMessageResponse(err.response.data.message);
-        });
-    }
-  };
+
   const handleSubmitCustomer = (e) => {
     e.preventDefault();
     const resultValidate = validateCustomer(formCustomer);
@@ -149,6 +106,58 @@ const LoginCustomer = () => {
     setFormErrorSeller(resultValidate);
     handleClickSeller(resultValidate);
     console.log("isi dari", formSeller);
+  };
+
+  const handleClickCustomer = (resultValidate) => {
+    if (Object.keys(resultValidate).length === 0) {
+      setLoading(true);
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}auth/login/customer`, {
+          email: formCustomer.email,
+          password: formCustomer.password
+        })
+        .then((res) => {
+          const result = res.data.data[0];
+          const customerId = result.id;
+          localStorage.setItem("auth", "1");
+          localStorage.setItem("userId", JSON.stringify(customerId));
+          console.log(res.data.message);
+          setLoading(false);
+          setMessageResponse("");
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err.response);
+          setLoading(false);
+          setMessageResponse(err.response.data.message);
+        });
+    }
+  };
+  const handleClickSeller = (resultValidate) => {
+    if (Object.keys(resultValidate).length === 0) {
+      setLoading(true);
+      axios
+        .post(`${process.env.REACT_APP_URL_BACKEND}auth/login/seller`, {
+          email: formSeller.email,
+          password: formSeller.password
+        })
+        .then((res) => {
+          const result = res.data.data[0];
+          const sellerId = result.id;
+          localStorage.setItem("auth", "1");
+          localStorage.setItem("userId", JSON.stringify(sellerId));
+          console.log(res.data.message);
+          setLoading(false);
+          setMessageResponse("");
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err.response);
+          setLoading(false);
+          setMessageResponse(true);
+          setMessageResponse(err.response.data.message);
+        });
+    }
   };
 
   return (
@@ -264,7 +273,7 @@ const LoginCustomer = () => {
         </div>
       )}
       <div className="text-center mt-3">
-        Don't have a Tokopedia account?{" "}
+        Don't have a Blanja account?{" "}
         <Link
           to={"/auth/register"}
           className="text-danger"

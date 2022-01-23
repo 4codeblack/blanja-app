@@ -13,6 +13,12 @@ import Cart from "../pages/main/Cart";
 import Checkout from "../pages/main/Checkout";
 import PageProduct from "../pages/main/PageProduct";
 
+import ProfileCustomer from "../pages/main/ProfileCustomer";
+import MyAccount from "../pages/main/ProfileCustomer/MyAccount";
+import MyOrder from "../pages/main/ProfileCustomer/MyOrder";
+import ShippingAddress from "../pages/main/ProfileCustomer/ShippingAddress";
+
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -34,6 +40,15 @@ const Router = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="page-product/:id" element={<PageProduct />} />
+          <Route path={"profile"} element={<ProfileCustomer />}>
+              <Route path={"account"} element={<MyAccount />} />
+              <Route path={"address"} element={<ShippingAddress />} />
+              <Route path={"order"} element={<MyOrder />} />
+              <Route
+                index
+                element={<Navigate to={"/main/profile/account"} />}
+              />
+          </Route>
         </Route>
 
         <Route path={"/*"} element={<Page404 />} />

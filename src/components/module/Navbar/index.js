@@ -15,6 +15,7 @@ const Navbar = () => {
 
   const toHomePage = () => navigate("/main");
   const toCart = () => navigate("/main/cart");
+  const toProfilePage = () => navigate("/main/profile/account");
   const logIn = () => navigate("/auth/login");
   const signUp = () => navigate("/auth/register");
 
@@ -46,12 +47,17 @@ const Navbar = () => {
         {auth === "1" ? (
           <div className="navbar-right d-flex align-items-center">
             <FiIcons.FiShoppingCart
-              className="navbar-icons  me-3"
+              className="navbar-icons cart me-3"
               onClick={toCart}
             />
-            <FiIcons.FiBell className="navbar-icons ms-3 me-3" />
-            <BiIcons.BiEnvelope className="navbar-icons ms-3 me-3" />
-            <img className="ms-3" src={profile} alt="Profile" />
+            <FiIcons.FiBell className="navbar-icons notif ms-3 me-3" />
+            <BiIcons.BiEnvelope className="navbar-icons chat ms-3 me-3" />
+            <img
+              onClick={toProfilePage}
+              className="navbar-profile ms-3"
+              src={profile}
+              alt="Profile"
+            />
           </div>
         ) : (
           <div className="navbar-right d-flex align-items-center">

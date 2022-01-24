@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import "../../../App.css";
 import Button from "../../../components/base/Button"
@@ -8,32 +9,23 @@ const Cart = () => {
   const navigate = useNavigate()
   const handleBuy = () => {
     navigate("/main/checkout")
+    localStorage.setItem('total-item', JSON.stringify(total))
   }
-
-  const [cart, setCart] = useState([{
-    id: 1,
-    name: "nike",
-    price: 1000000,
-    qty: 1
-  }, {
-    id: 2,
-    name: "adidas",
-    price: 2500000,
-    qty: 1
-  }])
-
-
-  const [array, setArray] = useState([])
+  const cartItem = JSON.parse(localStorage.getItem("item"));
+  const [cart, setCart] = useState(cartItem)
+  console.log(cartItem);
 
   const [checkedState, setCheckedState] = useState(
     new Array(cart.length).fill(false)
   )
 
+  const getFormattedPrice = (price) => `${price.toFixed()}`;
+
   const [total, setTotal] = useState(0);
 
   const handleOnChange = (id) => {
     const updatedCheckedState = checkedState.map((item, index) =>
-      index + 1 === id ? !item : item
+      index === id ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
@@ -50,43 +42,29 @@ const Cart = () => {
     setTotal(totalPrice)
   }
 
-  const handleCheckedValue = (e) => {
-    if (e.target.checked) {
-      let id = e.target.value;
-      setArray([...array, id])
-    }
-  }
-  console.log(array);
+  const handleIncrement = (index) => {
+    const newItems = [...cart];
 
-
-
-  const handleIncrement = (id) => {
-    const index = cart.findIndex(item => item.id === id)
-    let cartItem = cart[index]
-    console.log(cartItem);
-    cartItem.qty++
-    updatecartItem()
-    handleOnChange()
+    newItems[index].qty++;
+    setCart(newItems);
+    handleOnChange();
   }
 
-
-  const handleDecrement = (id) => {
-    const index = cart.findIndex(item => item.id === id)
-    let cartItem = cart[index]
-    if (cartItem.qty <= 0) {
-      cartItem.qty = 0;
+  const handleDecrement = (index) => {
+    const newItems = [...cart];
+    if (newItems[index].qty <= 1) {
+      newItems[index].qty = 1;
     } else {
-      cartItem.qty--
+      newItems[index].qty--;
     }
-    updatecartItem()
-    handleOnChange()
+
+    setCart(newItems);
+    handleOnChange();
   };
 
-  const updatecartItem = () => {
-    setCart(cart)
-    console.log(cart);
+  const handleDelete = () => {
+    localStorage.removeItem('item')
   }
-
 
   return (
     <div className='d-flex flex-column wrapper'>
@@ -98,12 +76,12 @@ const Cart = () => {
               <div>
                 <Input
                   type="checkbox"
-                  className="me-3"
+                  className="mt-2 check"
                 />
-                <span className=''>Select all items</span>
-                <span className='mx-2 fw-light'>(... items selected)</span>
+                <span className='fw-500'>Select all items</span>
+                <span className='mx-2 fw-light'>(1 item selected)</span>
               </div>
-              <span className='text-red'>Delete</span>
+              <Button className='text-red bg-white' onClick={handleDelete}>Delete</Button>
             </div>
           </div>
 
@@ -111,28 +89,27 @@ const Cart = () => {
             return (
               <div className='box shadow-sm p-3 mt-2 rounded'>
                 <div className='d-flex flex-row justify-content-between'>
-                  <div className='d-flex flex-row'>
-                  <Input 
-                      type="checkbox" 
-                      name={product.name} 
-                      value={product.id} 
-                      className="me-3 mt-3"
-                      onChange={(e) => { handleCheckedValue(e); handleOnChange(product.id) } }
-                      defaultChecked={false}
-                      />
-                    <img src="" alt=""></img>
-                    <img className='mx-2' src="" alt=""></img>
-                    <div>
-                      <p className='m-0'>{product.name}</p>
-                      <span className='fw-light'>{product.seller}</span>
+                  <label className='d-flex flex-row'>
+                    <Input
+                      type="checkbox"
+                      name={product.Name}
+                      value={product.id}
+                      className="mt-3 check"
+                      onChange={() => handleOnChange(index)}
+                      checked={checkedState[index]}
+                    />
+                    <img className='mx-2 rounded' src={product.photo1} alt="" height="60px"></img>
+                    <div className='ms-1 mt-1'>
+                      <p className='m-0 fw-500'>{product.Name}</p>
+                      <span className='fw-light'>{product.namestore}</span>
                     </div>
-                  </div>
+                  </label>
                   <div className='d-flex flex-row my-2'>
-                    <Button className='btn btn-minus rounded-circle text-white' onClick={() => handleDecrement(product.id)}>-</Button>
+                    <Button className='btn btn-minus rounded-circle text-white' onClick={() => handleDecrement(index)}>-</Button>
                     <div className='mx-3 mt-1'>{product.qty}</div>
-                    <Button className='btn bg-white rounded-circle' onClick={() => handleIncrement(product.id)}>+</Button>
+                    <Button className='btn bg-white rounded-circle h-75' onClick={() => handleIncrement(index)}>+</Button>
                   </div>
-                  <p className='mt-2'>{product.price}</p>
+                  <p className='mt-3 fw-500'>Rp{product.price}</p>
                 </div>
               </div>
             )
@@ -141,10 +118,10 @@ const Cart = () => {
 
         <div className='right-side p-2'>
           <div className='box shadow-sm p-3 mt-5 rounded'>
-            <p>Shopping Summary</p>
+            <p className='fw-500'>Shopping Summary</p>
             <div className='price d-flex flex-row justify-content-between'>
               <p className='fw-light'>Total price</p>
-              <p>{total}</p>
+              <p className='fw-500'>Rp{getFormattedPrice(total)}</p>
             </div>
             <Button className='bg-red w-100 border-0 p-1 text-white rounded-pill' onClick={handleBuy}>Buy</Button>
           </div>

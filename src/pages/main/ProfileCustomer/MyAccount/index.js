@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { Fragment, useContext, useState } from "react";
 import Input from "../../../../components/base/Input";
 import Button from "../../../../components/base/Button";
 import { EditProfileContext } from "../../../../context/EditProfileContext";
 import profilePic from "../../../../assets/img/profilePicute.png";
+import { CustomerContext } from "../../../../context/CustomerContext";
 
 const MyAccount = () => {
-  // eslint-disable-next-line no-unused-vars
+  const { customer, setCustomer } = useContext(CustomerContext);
   const { editProfile, setEditProfile } = useContext(EditProfileContext);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [gender, setGender] = useState("");
@@ -38,7 +40,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="text"
                     id="Name"
-                    placeholder="Johanes"
+                    placeholder={customer.Name}
                     disabled
                   />
                 </div>
@@ -50,7 +52,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="email"
                     id="Email"
-                    placeholder="johanes@gmail.com"
+                    placeholder={customer.email}
                     disabled
                   />
                 </div>
@@ -62,7 +64,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="tel"
                     id="Email"
-                    placeholder="08884647"
+                    placeholder={customer.phone}
                     disabled
                   />
                 </div>
@@ -109,7 +111,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="text"
                     id="Name"
-                    placeholder="Johanes"
+                    placeholder={customer.Name}
                   />
                 </div>
                 <div className="my-profile-input d-flex flex-row ">
@@ -123,7 +125,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="email"
                     id="Email"
-                    placeholder="johanes@gmail.com"
+                    placeholder={customer.email}
                   />
                 </div>
                 <div className="my-profile-input d-flex flex-row ">
@@ -137,7 +139,7 @@ const MyAccount = () => {
                     className="input-form"
                     type="tel"
                     id="Phone"
-                    placeholder="08884647"
+                    placeholder={customer.phone}
                   />
                 </div>
                 <div className="my-profile-input mt-4 d-flex flex-row ">

@@ -1,14 +1,37 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Slider from "../../../components/module/CarouselPromo/Slider";
 import CarouselCategory from "../../../components/module/CarouselCategory";
 import Cards from "../../../components/module/Cards";
 import "./home.css";
 import { useNavigate } from "react-router-dom";
+import { CustomerContext } from "../../../context/CustomerContext";
 
 const Home = () => {
+  const { customer, setCustomer } = useContext(CustomerContext);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    const customerId = JSON.parse(localStorage.getItem("customerId"));
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/profile/${customerId}`)
+      .then((res) => {
+        setLoading(false);
+        const result = res.data.data[0];
+        setCustomer(result);
+        console.log(result);
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}customer/all-product`)

@@ -15,6 +15,8 @@ const Cards = ({ onClick, ...props }) => {
           <AiIcons.AiFillStar className="star-icons" />
           <AiIcons.AiFillStar className="star-icons" />
           <AiIcons.AiFillStar className="star-icons" />
+          <AiIcons.AiFillStar className="star-icons" />
+          <AiIcons.AiFillStar className="star-icons" />
         </div>
       </div>
     </Fragment>

@@ -18,6 +18,7 @@
   color: #000000;
 }
 .product-price {
+  margin-bottom: 0.5em;
   color: #db3022;
 }
 .store-name {
@@ -27,5 +28,5 @@
   color: #9b9b9b;
 }
 .star-icons {
-  color: #ffba49;
+  color: #9b9b9b;
 }

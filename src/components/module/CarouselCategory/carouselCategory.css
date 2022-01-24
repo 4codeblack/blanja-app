@@ -1,3 +1,6 @@
+.img-category {
+  cursor: pointer;
+}
 .rec.rec-arrow {
   background-color: #fff;
   text-align: center;

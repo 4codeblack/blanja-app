@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import * as FiIcons from "react-icons/fi";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
@@ -7,7 +7,9 @@ import profile from "../../../assets/img/profile-picture.png";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import "./navbar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { SearchContext } from "../../../context/SearchContext";
+import axios from "axios";
 
 const Navbar = () => {
   let auth = localStorage.getItem("auth");
@@ -18,6 +20,34 @@ const Navbar = () => {
   const toProfilePage = () => navigate("/main/profile/account");
   const logIn = () => navigate("/auth/login");
   const signUp = () => navigate("/auth/register");
+
+  const { searchProduct, setSearchProduct } = useContext(SearchContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const querySearch = searchParams.get("search");
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}customer/product?name=${querySearch}`
+      )
+      .then((res) => {
+        const result = res.data.data;
+        setSearchProduct(result);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [querySearch]);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      setSearchParams({ search: e.target.value });
+      // navigate("/main/search");
+    }
+  };
+  console.log(searchProduct);
 
   return (
     <Fragment>
@@ -36,6 +66,7 @@ const Navbar = () => {
               type="text"
               placeholder="Search"
               name="search"
+              onKeyUp={handleSearch}
             />
             <BsIcons.BsSearch className="search-icon text-grey" />
           </div>

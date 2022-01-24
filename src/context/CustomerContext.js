@@ -16,7 +16,6 @@ const CustomerProvider = (props) => {
         setLoading(false);
         const result = res.data.data[0];
         setCustomer(result);
-        console.log(result);
       })
       .catch((err) => {
         setLoading(false);

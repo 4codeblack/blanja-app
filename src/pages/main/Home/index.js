@@ -23,7 +23,6 @@ const Home = () => {
         setLoading(false);
         const result = res.data.data[0];
         setCustomer(result);
-        console.log(result);
       })
       .catch((err) => {
         setLoading(false);
@@ -78,6 +77,7 @@ const Home = () => {
                 productName={product.Name}
                 productPrice={product.price}
                 storeName={product.namestore}
+                productPhoto={product.photo1}
                 onClick={() => navigate(`/main/page-product/${product.id}`)}
               />
             ))}
@@ -99,6 +99,7 @@ const Home = () => {
                 productName={product.Name}
                 productPrice={product.price}
                 storeName={product.namestore}
+                productPhoto={product.photo3}
                 onClick={() => navigate(`/main/page-product/${products.id}`)}
               />
             ))}

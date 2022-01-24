@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import "../../../App.css";
 import Button from "../../../components/base/Button"
@@ -32,7 +33,7 @@ const Cart = () => {
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
         if (currentState === true) {
-          return sum + cart[index].price;
+          return sum + (cart[index].price * cart[index].qty);
         }
         return sum;
       },
@@ -41,29 +42,28 @@ const Cart = () => {
     setTotal(totalPrice)
   }
 
-  const handleIncrement = (id) => {
-    const index = cart.findIndex(item => item.id === id)
-    let cartItem = cart[index]
-    console.log(cartItem);
-    handleOnChange()
+  const handleIncrement = (index) => {
+    const newItems = [...cart];
+
+    newItems[index].qty++;
+    setCart(newItems);
+    handleOnChange();
   }
 
-
-  const handleDecrement = (id) => {
-    const index = cart.findIndex(item => item.id === id)
-    let cartItem = cart[index]
-    if (cartItem.qty <= 1) {
-      cartItem.qty = 1;
+  const handleDecrement = (index) => {
+    const newItems = [...cart];
+    if (newItems[index].qty <= 1) {
+      newItems[index].qty = 1;
     } else {
-      cartItem.qty--
+      newItems[index].qty--;
     }
-    handleOnChange()
+
+    setCart(newItems);
+    handleOnChange();
   };
 
-
-
   const handleDelete = () => {
-    // localStorage.removeItem('item')
+    localStorage.removeItem('item')
   }
 
   return (
@@ -76,10 +76,10 @@ const Cart = () => {
               <div>
                 <Input
                   type="checkbox"
-                  className="me-3"
+                  className="mt-2 check"
                 />
-                <span className=''>Select all items</span>
-                <span className='mx-2 fw-light'>(... items selected)</span>
+                <span className='fw-500'>Select all items</span>
+                <span className='mx-2 fw-light'>(1 item selected)</span>
               </div>
               <Button className='text-red bg-white' onClick={handleDelete}>Delete</Button>
             </div>
@@ -89,29 +89,27 @@ const Cart = () => {
             return (
               <div className='box shadow-sm p-3 mt-2 rounded'>
                 <div className='d-flex flex-row justify-content-between'>
-                  <div className='d-flex flex-row'>
+                  <label className='d-flex flex-row'>
                     <Input
                       type="checkbox"
                       name={product.Name}
                       value={product.id}
-                      className="me-3 mt-3"
-                      onChange={() => handleOnChange(index) }
-                      defaultChecked={false}
+                      className="mt-3 check"
+                      onChange={() => handleOnChange(index)}
                       checked={checkedState[index]}
                     />
-                    <img src="" alt=""></img>
-                    <img className='mx-2' src="" alt=""></img>
-                    <div>
-                      <p className='m-0'>{product.Name}</p>
+                    <img className='mx-2 rounded' src={product.photo1} alt="" height="60px"></img>
+                    <div className='ms-1 mt-1'>
+                      <p className='m-0 fw-500'>{product.Name}</p>
                       <span className='fw-light'>{product.namestore}</span>
                     </div>
-                  </div>
+                  </label>
                   <div className='d-flex flex-row my-2'>
-                    <Button className='btn btn-minus rounded-circle text-white' onClick={() => handleDecrement(product.id)}>-</Button>
+                    <Button className='btn btn-minus rounded-circle text-white' onClick={() => handleDecrement(index)}>-</Button>
                     <div className='mx-3 mt-1'>{product.qty}</div>
-                    <Button className='btn bg-white rounded-circle' onClick={() => handleIncrement(product.id)}>+</Button>
+                    <Button className='btn bg-white rounded-circle h-75' onClick={() => handleIncrement(index)}>+</Button>
                   </div>
-                  <p className='mt-2'>{product.price}</p>
+                  <p className='mt-3 fw-500'>Rp{product.price}</p>
                 </div>
               </div>
             )
@@ -120,10 +118,10 @@ const Cart = () => {
 
         <div className='right-side p-2'>
           <div className='box shadow-sm p-3 mt-5 rounded'>
-            <p>Shopping Summary</p>
+            <p className='fw-500'>Shopping Summary</p>
             <div className='price d-flex flex-row justify-content-between'>
               <p className='fw-light'>Total price</p>
-              <p>{getFormattedPrice(total)}</p>
+              <p className='fw-500'>Rp{getFormattedPrice(total)}</p>
             </div>
             <Button className='bg-red w-100 border-0 p-1 text-white rounded-pill' onClick={handleBuy}>Buy</Button>
           </div>

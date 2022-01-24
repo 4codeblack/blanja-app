@@ -33,13 +33,9 @@
 
 .modal-style-address {
     width: 50%;
-    height: 70%;
+    height: 75%;
     background-color: #fefefe;
     margin: auto;
     margin-top: 80px;
     border-radius: 6px;
-}
-
-.footer {
-    top: 130px;
 }

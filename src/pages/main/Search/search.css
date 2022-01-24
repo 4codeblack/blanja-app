@@ -1,0 +1,11 @@
+.search-content {
+  height: 100%;
+  width: 100%;
+  background-color: darkseagreen;
+}
+.search-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 8em;
+  margin-right: 8em;
+}

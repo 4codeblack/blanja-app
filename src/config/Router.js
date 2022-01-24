@@ -9,6 +9,7 @@ import ResetPass from "../pages/auth/ResetPass";
 import Page404 from "../pages/404";
 import Main from "../pages/main";
 import Home from "../pages/main/Home";
+import ProductCategory from "../pages/main/ProductCategory";
 import Cart from "../pages/main/Cart";
 import Checkout from "../pages/main/Checkout";
 import PageProduct from "../pages/main/PageProduct";
@@ -17,7 +18,7 @@ import ProfileCustomer from "../pages/main/ProfileCustomer";
 import MyAccount from "../pages/main/ProfileCustomer/MyAccount";
 import MyOrder from "../pages/main/ProfileCustomer/MyOrder";
 import ShippingAddress from "../pages/main/ProfileCustomer/ShippingAddress";
-
+import Search from "../pages/main/Search";
 
 const Router = () => {
   return (
@@ -37,17 +38,16 @@ const Router = () => {
 
         <Route path={"/main"} element={<Main />}>
           <Route index element={<Home />} />
+          <Route path="category/:id" element={<ProductCategory />} />
+          <Route path="search" element={<Search />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="page-product/:id" element={<PageProduct />} />
           <Route path={"profile"} element={<ProfileCustomer />}>
-              <Route path={"account"} element={<MyAccount />} />
-              <Route path={"address"} element={<ShippingAddress />} />
-              <Route path={"order"} element={<MyOrder />} />
-              <Route
-                index
-                element={<Navigate to={"/main/profile/account"} />}
-              />
+            <Route path={"account"} element={<MyAccount />} />
+            <Route path={"address"} element={<ShippingAddress />} />
+            <Route path={"order"} element={<MyOrder />} />
+            <Route index element={<Navigate to={"/main/profile/account"} />} />
           </Route>
         </Route>
 

@@ -9,19 +9,41 @@ import socks from "../../../assets/img/carouselCategory/socks.png";
 import heels from "../../../assets/img/carouselCategory/high-heels.png";
 import tie from "../../../assets/img/carouselCategory/tie.png";
 import accesories from "../../../assets/img/carouselCategory/accesorries.png";
+import { useNavigate } from "react-router-dom";
 
 const CarouselCategory = () => {
+  const navigate = useNavigate();
   return (
     <Fragment>
       <Carousel itemsToShow={3}>
-        <img src={tshirt} alt="socks" />
-        <img src={short} alt="socks" />
-        <img src={jacket} alt="socks" />
-        <img src={pants} alt="socks" />
-        <img src={socks} alt="socks" />
-        <img src={tie} alt="socks" />
-        <img src={heels} alt="socks" />
-        <img src={accesories} alt="socks" />
+        <img
+          onClick={() => navigate("/main/category/T-shirt")}
+          className="img-category"
+          src={tshirt}
+          alt="T-shirt"
+        />
+        <img
+          onClick={() => navigate("/main/category/Short")}
+          className="img-category"
+          src={short}
+          alt="Short"
+        />
+        <img
+          onClick={() => navigate("/main/category/Jacket")}
+          className="img-category"
+          src={jacket}
+          alt="Jacket"
+        />
+        <img
+          onClick={() => navigate("/main/category/Pants")}
+          className="img-category"
+          src={pants}
+          alt="Pants"
+        />
+        <img className="img-category" src={socks} alt="socks" />
+        <img className="img-category" src={tie} alt="Tie" />
+        <img className="img-category" src={heels} alt="Heels" />
+        <img className="img-category" src={accesories} alt="Accesories" />
       </Carousel>
     </Fragment>
   );

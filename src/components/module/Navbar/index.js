@@ -1,4 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { SearchContext } from "../../../context/SearchContext";
+import axios from "axios";
 import * as FiIcons from "react-icons/fi";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
@@ -9,14 +12,50 @@ import Button from "../../base/Button";
 import "./navbar.css";
 
 const Navbar = () => {
+  let auth = localStorage.getItem("auth");
+  const navigate = useNavigate();
   const [click, setClick] = useState(true);
   const handleClick = () => setClick(!click);
+  const toHomePage = () => navigate("/main");
+  const toCart = () => navigate("/main/cart");
+  const toProfilePage = () => navigate("/main/profile/account");
+  const logIn = () => navigate("/auth/login");
+  const signUp = () => navigate("/auth/register");
+
+  const { searchProduct, setSearchProduct } = useContext(SearchContext);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const querySearch = searchParams.get("search");
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_URL_BACKEND}customer/product?name=${querySearch}`
+      )
+      .then((res) => {
+        const result = res.data.data;
+        setSearchProduct(result);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [querySearch]);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      setSearchParams({ search: e.target.value });
+      // navigate("/main/search");
+    }
+  };
+  console.log(searchProduct);
+
   return (
     <Fragment>
       <div className="navbar d-flex justify-content-around align-items-center">
         <div className="navbar-left d-flex justify-content-around align-items-center">
           <img
-            onClick={handleClick}
+            onClick={toHomePage}
             className="navbar-logo me-5 mb-2"
             src={logo}
             alt="Blanja"
@@ -28,6 +67,7 @@ const Navbar = () => {
               type="text"
               placeholder="Search"
               name="search"
+              onKeyUp={handleSearch}
             />
             <BsIcons.BsSearch className="search-icon text-grey" />
           </div>
@@ -36,18 +76,30 @@ const Navbar = () => {
           </div>
         </div>
 
-        {click ? (
+        {auth === "1" ? (
           <div className="navbar-right d-flex align-items-center">
-            <FiIcons.FiShoppingCart className="navbar-icons  me-3" />
-            <FiIcons.FiBell className="navbar-icons ms-3 me-3" />
-            <BiIcons.BiEnvelope className="navbar-icons ms-3 me-3" />
-            <img className="ms-3" src={profile} alt="Profile" />
+            <FiIcons.FiShoppingCart
+              className="navbar-icons cart me-3"
+              onClick={toCart}
+            />
+            <FiIcons.FiBell className="navbar-icons notif ms-3 me-3" />
+            <BiIcons.BiEnvelope className="navbar-icons chat ms-3 me-3" />
+            <img
+              onClick={toProfilePage}
+              className="navbar-profile ms-3"
+              src={profile}
+              alt="Profile"
+            />
           </div>
         ) : (
           <div className="navbar-right d-flex align-items-center">
             <FiIcons.FiShoppingCart className="navbar-icons  me-3" />
-            <Button className="navbar-btn-login ms-3 me-3">Login</Button>
-            <Button className="navbar-btn-signup">Signup</Button>
+            <Button onClick={logIn} className="navbar-btn-login ms-3 me-3">
+              Login
+            </Button>
+            <Button onClick={signUp} className="navbar-btn-signup">
+              Signup
+            </Button>
           </div>
         )}
       </div>

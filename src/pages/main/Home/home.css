@@ -1,0 +1,46 @@
+/* styling carousel products */
+.carousel-products {
+  height: 45vh;
+  background-color: #f0f1f9;
+}
+.category,
+.new,
+.popular {
+  margin-top: 3.8em;
+  margin-left: 8em;
+}
+.category-title,
+.new-title,
+.popular-title {
+  font-weight: bold;
+  font-size: 2.5em;
+  line-height: 34px;
+  color: #222222;
+}
+.category-text,
+.new-text,
+.popular-text {
+  font-weight: normal;
+  font-size: 1em;
+  line-height: 12px;
+  color: #9b9b9b;
+}
+
+.slider-category {
+  /* background-color: teal; */
+  width: 60%;
+  margin: 1em;
+}
+
+/* Styling display products */
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 8em;
+}
+.new-products,
+.popular-products {
+  height: 155vh;
+  width: 100%;
+  background-color: #ffffff;
+}

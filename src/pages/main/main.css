@@ -1,11 +1,52 @@
 .icons-size {
-    font-size: 1.3em;
-  }
-  .text-grey {
-    color: #8e8e93;
-  }
-  button {
-    border: 0;
-    outline: 0;
-  }
-  
+  font-size: 1.3em;
+}
+.text-grey {
+  color: #8e8e93;
+}
+button {
+  border: 0;
+  outline: 0;
+}
+
+.wrapper {
+  height: 100vh;
+}
+
+.left-side {
+  width: 70%;
+}
+
+.right-side {
+  width: 30%;
+}
+
+.bg-red {
+  background-color: #DB3022!important;
+}
+
+.text-red {
+  color: #DB3022!important;
+}
+
+.btn-minus {
+  height: 35px;
+  background: #D4D4D4!important;
+}
+
+.fw-light {
+  color: #9B9B9B;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.check {
+  width: 50px;
+  height: 17px;
+}
+
+.check input[type="checkbox"]:checked {
+  background: #D9534F;
+}

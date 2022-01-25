@@ -25,29 +25,28 @@ const LoginCustomer = () => {
     role: "seller"
   });
 
-  const onClick = () => {
+  const onClick = (params) => {
+    setTogledSeller(params)
+    setTogledUser(!params)
+
     if (togledUser) {
-      setFormCustomer({
-        email: "",
-        password: "",
-        role: "customer"
-      });
-      setFormErrorCustomer({});
-      setMessageResponse("");
-      setTogledUser(false);
-      setTogledSeller(true);
-    } else {
       setFormSeller({
         email: "",
         password: "",
         role: "seller"
-      });
+      })
+      setFormErrorCustomer({});
+      setMessageResponse("");
+    } else {
+      setFormCustomer({
+        email: "",
+        password: "",
+        role: "customer"
+      })
       setFormErrorSeller({});
       setMessageResponse("");
-      setTogledUser(true);
-      setTogledSeller(false);
     }
-  };
+  }
 
   const handleChangeCustomer = (e) => {
     setFormCustomer({
@@ -167,7 +166,7 @@ const LoginCustomer = () => {
       </div>
       <div className="d-flex justify-content-center my-5">
         <div
-          onClick={onClick}
+          onClick={()=>onClick(false)}
           className={
             togledUser
               ? "user-pointer bg-danger text-white px-3 py-3 border"
@@ -177,7 +176,7 @@ const LoginCustomer = () => {
           Customer
         </div>
         <div
-          onClick={onClick}
+          onClick={()=>onClick(true)}
           className={
             togledSeller
               ? "user-pointer bg-danger text-white px-4 py-3 border"

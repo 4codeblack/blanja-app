@@ -28,29 +28,28 @@ const Register = () => {
         role: 'seller'
     })
 
-    const onClick = () => {
+    const onClick = (params) => {
+        setTogledSeller(params)
+        setTogledUser(!params)
+
         if (togledUser) {
-            setFormCustomer({
+            setFormSeller({
                 name: '',
                 email: '',
                 password: '',
-                role: 'customer'
+                role: 'seller'
             })
             setFormErrorCustomer({})
-            setTogledUser(false)
-            setTogledSeller(true)
         } else {
-            setFormSeller({
+            setFormCustomer({
                 name: '',
                 email: '',
                 phone: '',
                 storename: '',
                 password: '',
-                role: 'seller'
+                role: 'customer'
             })
             setFormErrorSeller({})
-            setTogledUser(true)
-            setTogledSeller(false)
         }
     }
 
@@ -166,8 +165,8 @@ const Register = () => {
         <Fragment>
             <div className="text-center fw-bold my-5">Please sign up with your account</div>
             <div className="d-flex justify-content-center my-5">
-                <div onClick={onClick} className={togledUser ? "user-pointer bg-danger text-white px-3 py-3 border" : "user-pointer bg-transparent px-3 py-3 border"}>Customer</div>
-                <div onClick={onClick} className={togledSeller ? "user-pointer bg-danger text-white px-4 py-3 border" : "user-pointer bg-transparent px-4 py-3 border"}>Seller</div>
+                <div onClick={()=>onClick(false)} className={togledUser ? "user-pointer bg-danger text-white px-3 py-3 border" : "user-pointer bg-transparent px-3 py-3 border"}>Customer</div>
+                <div onClick={()=>onClick(true)} className={togledSeller ? "user-pointer bg-danger text-white px-4 py-3 border" : "user-pointer bg-transparent px-4 py-3 border"}>Seller</div>
             </div>
             {togledUser ? (
                 <div className="text-center d-flex flex-column justify-content-center align-items-center">

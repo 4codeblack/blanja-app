@@ -35,7 +35,7 @@ const MyAccount = () => {
         const result = res.data.data;
         setCustomer(result);
         setEditProfile(!editProfile);
-        navigate("/main/profile");
+        navigate("/main/profile-customer");
       })
       .catch((err) => {
         console.log(err.response);

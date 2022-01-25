@@ -47,7 +47,7 @@ const SidebarCustomer = () => {
         </div>
       </div>
 
-      <Link to={"/main/profile/account"} style={{ textDecoration: "none" }}>
+      <Link to={"/main/profile-customer/account"} style={{ textDecoration: "none" }}>
         <div className="menu-items d-flex flex-row align-items-center mb-3">
           <div className="icons-wrapper bg-item-blue">
             <BiIcons.BiUser className="menu-icons" />
@@ -56,7 +56,7 @@ const SidebarCustomer = () => {
         </div>
       </Link>
 
-      <Link to={"/main/profile/address"} style={{ textDecoration: "none" }}>
+      <Link to={"/main/profile-customer/address"} style={{ textDecoration: "none" }}>
         <div className="menu-items d-flex flex-row align-items-center mb-3">
           <div className="icons-wrapper bg-item-orange">
             <IoIcons.IoLocationOutline className="menu-icons" />
@@ -65,7 +65,7 @@ const SidebarCustomer = () => {
         </div>
       </Link>
 
-      <Link to={"/main/profile/order"} style={{ textDecoration: "none" }}>
+      <Link to={"/main/profile-customer/order"} style={{ textDecoration: "none" }}>
         <div className="menu-items d-flex flex-row align-items-center mb-3">
           <div className="icons-wrapper bg-item-pink">
             <IoIcons.IoClipboardOutline className="menu-icons" />

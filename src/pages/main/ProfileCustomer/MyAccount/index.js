@@ -1,25 +1,61 @@
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useContext, useState } from "react";
+import axios from "axios";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import Input from "../../../../components/base/Input";
 import Button from "../../../../components/base/Button";
 import { EditProfileContext } from "../../../../context/EditProfileContext";
 import profilePic from "../../../../assets/img/profilePicute.png";
 import { CustomerContext } from "../../../../context/CustomerContext";
+import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
   const { customer, setCustomer } = useContext(CustomerContext);
   const { editProfile, setEditProfile } = useContext(EditProfileContext);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
   const [gender, setGender] = useState("");
+  const customerId = JSON.parse(localStorage.getItem("customerId"));
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setGender(e.target.value);
   };
   const handleClick = () => {
+    axios
+      .put(
+        `${process.env.REACT_APP_URL_BACKEND}customer/profile/update/${customerId}`,
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          gender: gender
+        }
+      )
+      .then((res) => {
+        const result = res.data.data;
+        setCustomer(result);
+        setEditProfile(!editProfile);
+        navigate("/main/profile");
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
     console.info(form);
-    // console.info(gender);
   };
+
+  useEffect(() => {
+    const customerId = JSON.parse(localStorage.getItem("customerId"));
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/profile/${customerId}`)
+      .then((res) => {
+        const result = res.data.data[0];
+        setCustomer(result);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Fragment>
       <section className="customer-main-content">

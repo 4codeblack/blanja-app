@@ -54,7 +54,12 @@ const Router = () => {
             <Route path={"account"} element={<MyAccount />} />
             <Route path={"address"} element={<ShippingAddress />} />
             <Route path={"order"} element={<MyOrder />} />
-            <Route index element={<Navigate to={"/main/profile-customer/account"} />} />
+
+            <Route
+              index
+              element={<Navigate to={"/main/profile-customer/account"} />}
+            />
+       
           </Route>
           <Route path={"profile-seller"} element={<Profile />}>
              <Route path={"my-order"} element={<MyOrderSell />} />
@@ -62,6 +67,7 @@ const Router = () => {
              <Route path={"selling-product"} element={<SellingProduct />} />
              <Route path={"store-profile"} element={<StoreProfile />} />
              <Route index element={<Navigate to={"/main/profile-seller/store-profile"} />} />
+
           </Route>
         </Route>
 

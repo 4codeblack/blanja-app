@@ -18,7 +18,7 @@ const Navbar = () => {
   const handleClick = () => setClick(!click);
   const toHomePage = () => navigate("/main");
   const toCart = () => navigate("/main/cart");
-  const toProfilePage = () => navigate("/main/profile/account");
+  const toProfilePage = () => navigate("/main/profile-customer/account");
   const logIn = () => navigate("/auth/login");
   const signUp = () => navigate("/auth/register");
 

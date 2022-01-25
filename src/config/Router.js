@@ -20,6 +20,13 @@ import MyOrder from "../pages/main/ProfileCustomer/MyOrder";
 import ShippingAddress from "../pages/main/ProfileCustomer/ShippingAddress";
 import Search from "../pages/main/Search";
 
+import Profile from '../pages/main/Profile'
+import MyOrderSell from '../pages/main/Profile/MyOrder'
+import MyProduct from '../pages/main/Profile/MyProduct'
+import SellingProduct from '../pages/main/Profile/SellingProduct'
+import StoreProfile from '../pages/main/Profile/StoreProfile'
+
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -43,11 +50,18 @@ const Router = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="page-product/:id" element={<PageProduct />} />
-          <Route path={"profile"} element={<ProfileCustomer />}>
+          <Route path={"profile-customer"} element={<ProfileCustomer />}>
             <Route path={"account"} element={<MyAccount />} />
             <Route path={"address"} element={<ShippingAddress />} />
             <Route path={"order"} element={<MyOrder />} />
-            <Route index element={<Navigate to={"/main/profile/account"} />} />
+            <Route index element={<Navigate to={"/main/profile-customer/account"} />} />
+          </Route>
+          <Route path={"profile-seller"} element={<Profile />}>
+             <Route path={"my-order"} element={<MyOrderSell />} />
+             <Route path={"my-product"} element={<MyProduct />} />
+             <Route path={"selling-product"} element={<SellingProduct />} />
+             <Route path={"store-profile"} element={<StoreProfile />} />
+             <Route index element={<Navigate to={"/main/profile-seller/store-profile"} />} />
           </Route>
         </Route>
 

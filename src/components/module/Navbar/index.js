@@ -1,4 +1,7 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { SearchContext } from "../../../context/SearchContext";
+import axios from "axios";
 import * as FiIcons from "react-icons/fi";
 import * as BsIcons from "react-icons/bs";
 import * as BiIcons from "react-icons/bi";
@@ -7,14 +10,12 @@ import profile from "../../../assets/img/profile-picture.png";
 import Input from "../../base/Input";
 import Button from "../../base/Button";
 import "./navbar.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { SearchContext } from "../../../context/SearchContext";
-import axios from "axios";
 
 const Navbar = () => {
   let auth = localStorage.getItem("auth");
   const navigate = useNavigate();
-
+  const [click, setClick] = useState(true);
+  const handleClick = () => setClick(!click);
   const toHomePage = () => navigate("/main");
   const toCart = () => navigate("/main/cart");
   const toProfilePage = () => navigate("/main/profile-customer/account");

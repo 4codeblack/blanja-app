@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SearchContext } from "../../../context/SearchContext";
 import axios from "axios";
@@ -13,12 +13,19 @@ import "./navbar.css";
 
 const Navbar = () => {
   let auth = localStorage.getItem("auth");
+  const sellerId = JSON.parse(localStorage.getItem("sellerId"));
+  const customerId = JSON.parse(localStorage.getItem("customerId"));
   const navigate = useNavigate();
-  const [click, setClick] = useState(true);
-  const handleClick = () => setClick(!click);
+
   const toHomePage = () => navigate("/main");
   const toCart = () => navigate("/main/cart");
-  const toProfilePage = () => navigate("/main/profile-customer/account");
+  const toProfilePage = () => {
+    if (sellerId) {
+      navigate("/main/profile-seller/store-profile");
+    } else if (customerId) {
+      navigate("/main/profile-customer/account");
+    }
+  };
   const logIn = () => navigate("/auth/login");
   const signUp = () => navigate("/auth/register");
 

@@ -15,17 +15,15 @@ const SellingProduct = () => {
   const ls = JSON.parse(localStorage.getItem("PictProducts"))
 
   const [form, setForm] = useState({
-    namestore: "ipinstore",
     name: '',
     price: '',
     qty: '',
-    photo1: ls.picOne,
-    photo2: ls.picTwo,
-    photo3: ls.picThree,
-    photo4: ls.picFour,
-    photo5: ls.picFive,
+    photo1: 'https://picsum.photos/200/200?random=1',
+    photo2: 'https://picsum.photos/200/200?random=2',
+    photo3: 'https://picsum.photos/200/200?random=3',
+    photo4: 'https://picsum.photos/200/200?random=4',
+    photo5: 'https://picsum.photos/200/200?random=5',
     description: '',
-    id: 409466
   })
 
   const handleChangeForm = (e) => {
@@ -55,9 +53,6 @@ const SellingProduct = () => {
     }
     if (!values.condition) {
       errors.condition = "Please select type of goods";
-    }
-    if (values.photo1 === "") {
-      errors.photo1 = "Please complete pictures of goods";
     }
     if (!values.description) {
       errors.description = "Description of goods is required";
@@ -197,11 +192,11 @@ const SellingProduct = () => {
             <div className="border rounded-3 my-3">
               <div className="d-flex flex-column">
                 <div className="d-flex p-3 align-items-center">
-                  <img className="mx-3" src={ls.picOne} width={190} height={190} alt="" />
-                  <img className="mx-3" src={ls.picTwo} width={120} height={120} alt="" />
-                  <img className="mx-3" src={ls.picThree} width={120} height={120} alt="" />
-                  <img className="mx-3" src={ls.picFour} width={120} height={120} alt="" />
-                  <img className="mx-3" src={ls.picFive} width={120} height={120} alt="" />
+                  <img className="mx-3"  src={""} width={190} height={190} alt="" />
+                  <img className="mx-3" src={""} width={120} height={120} alt="" />
+                  <img className="mx-3" src={""} width={120} height={120} alt="" />
+                  <img className="mx-3" src={""} width={120} height={120} alt="" />
+                  <img className="mx-3" src={""} width={120} height={120} alt="" />
                 </div>
                 <div className="ms-5 text-muted ">Foto utama</div>
                 <div className="w-100 px-5"><hr /></div>

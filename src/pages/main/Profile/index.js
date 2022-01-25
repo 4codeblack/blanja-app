@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './profile.css'
 import * as BiIcons from "react-icons/bi";
 import * as IoIcons from "react-icons/io5";
@@ -10,6 +10,13 @@ const Profile = () => {
   const [showMenuStore, setShowMenuStore] = useState(false)
   const [showMenuProduct, setShowMenuProduct] = useState(false)
   const [showMenuOrder, setShowMenuOrder] = useState(false)
+  const navigate = useNavigate()
+  const handleLogOut = () => {
+    localStorage.removeItem("auth");
+    localStorage.removeItem("customerId");
+    localStorage.removeItem("sellerId");
+    navigate("/auth/login");
+  };
 
   const toggleMenuStore = () => {
     if (showMenuStore) {
@@ -58,16 +65,16 @@ const Profile = () => {
                     <div className="icons-wrapper bg-item-blue">
                       <BiIcons.BiUser className="menu-icons" />
                     </div>
-                    <div className="mx-3 my-1" onClick={toggleMenuStore}>Store</div>
+                    <div className="mx-3 my-1 user-pointer" onClick={toggleMenuStore}>Store</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrowup-active-profile-seller.svg").default} alt="" />
                   </div>
-                  <div className="ms-5"><Link to={"/main/profile/store-profile"} style={{ textDecoration: 'none', color: 'grey' }}>Store Profile</Link></div>
+                  <div className="ms-5"><Link to={"/main/profile-seller/store-profile"} style={{ textDecoration: 'none', color: 'grey' }}>Store Profile</Link></div>
                 </>
               ) : (
                 <>
                   <div className="d-flex">
                     <img className="position-static" src={require("../../../assets/icons/store-icon-seller.svg").default} alt="" />
-                    <div className="mx-3 my-1 text-muted" onClick={toggleMenuStore}>Store</div>
+                    <div className="mx-3 my-1 text-muted user-pointer" onClick={toggleMenuStore}>Store</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrow-down-muted-profile-seller.svg").default} alt="" />
                   </div>
                 </>
@@ -76,17 +83,17 @@ const Profile = () => {
                 <>
                   <div className="d-flex mt-3">
                     <img className="position-static" src={require("../../../assets/icons/product-icon-profile-seller.svg").default} alt="" />
-                    <div className="mx-3 my-1" onClick={toggleMenuProduct}>Procuct</div>
+                    <div className="mx-3 my-1 user-pointer" onClick={toggleMenuProduct}>Procuct</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrowup-active-profile-seller.svg").default} alt="" />
                   </div>
-                  <div className="ms-5"><Link to={"/main/profile/my-product"} style={{ textDecoration: 'none', color: 'grey' }}>My Product</Link></div>
-                  <div className="ms-5"><Link to={"/main/profile/selling-product"} style={{ textDecoration: 'none', color: 'grey' }}>Selling Product</Link></div>
+                  <div className="ms-5"><Link to={"/main/profile-seller/my-product"} style={{ textDecoration: 'none', color: 'grey' }}>My Product</Link></div>
+                  <div className="ms-5"><Link to={"/main/profile-seller/selling-product"} style={{ textDecoration: 'none', color: 'grey' }}>Selling Product</Link></div>
                 </>
               ) : (
                 <>
                   <div className="d-flex mt-3">
                     <img className="position-static" src={require("../../../assets/icons/product-icon-profile-seller.svg").default} alt="" />
-                    <div className="mx-3 my-1 text-muted" onClick={toggleMenuProduct}>Product</div>
+                    <div className="mx-3 my-1 text-muted user-pointer" onClick={toggleMenuProduct}>Product</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrow-down-muted-profile-seller.svg").default} alt="" />
                   </div>
                 </>
@@ -98,18 +105,23 @@ const Profile = () => {
                     <div className="mx-3 my-1" onClick={toggleMenuOrder}>Order</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrowup-active-profile-seller.svg").default} alt="" />
                   </div>
-                  <div className="ms-5"><Link to={"/main/profile/my-order"} style={{ textDecoration: 'none', color: 'grey' }}>My Order</Link></div>
-                  <div className="ms-5"><Link to={"/main/profile/my-order"} style={{ textDecoration: 'none', color: 'grey' }}>Order Cancel</Link></div>
+                  <div className="ms-5"><Link to={"/main/profile-seller/my-order"} style={{ textDecoration: 'none', color: 'grey' }}>My Order</Link></div>
+                  <div className="ms-5"><Link to={"/main/profile-seller/my-order"} style={{ textDecoration: 'none', color: 'grey' }}>Order Cancel</Link></div>
                 </>
               ) : (
                 <>
                   <div className="d-flex mt-3">
                     <img className="position-static " src={require("../../../assets/icons/order-icon-profile-seller.svg").default} alt="" />
-                    <div className="mx-3 my-1 text-muted" onClick={toggleMenuOrder}>Order</div>
+                    <div className="mx-3 my-1 text-muted user-pointer" onClick={toggleMenuOrder}>Order</div>
                     <img className="ms-5" src={require("../../../assets/icons/arrow-down-muted-profile-seller.svg").default} alt="" />
                   </div>
                 </>
               )}
+              <div className="d-flex mt-3">
+                <img className="position-static " src={require("../../../assets/icons/order-icon-profile-seller.svg").default} alt="" />
+                <div className="mx-3 my-1 text-muted user-pointer" onClick={handleLogOut}>Logout</div>
+                <img className="ms-5" src={require("../../../assets/icons/arrow-down-muted-profile-seller.svg").default} alt="" />
+              </div>
             </div>
           </div>
         </div>

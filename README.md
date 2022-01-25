@@ -31,19 +31,19 @@ Here are some snippets about this app:
 
 - Login
 
-![Login]("./src/assets/readme/blanja-login.png")
+![Login](./src/assets/readme/blanja-login.png)
 
 - Home
 
-![Home]("./src/assets/readme/blanja-home.png")
+![Home](./src/assets/readme/blanja-home.png)
 
 - Details Product
 
-![Product]("./src/assets/readme/blanja-product.png")
+![Product](./src/assets/readme/blanja-product.png)
 
 - Profile Customer
 
-![Profile Customer]("./src/assets/readme/blanja-customer-profile.png")
+![Profile Customer](./src/assets/readme/blanja-customer-profile.png)
 
 ## Blanja Update!
 

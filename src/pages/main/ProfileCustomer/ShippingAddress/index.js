@@ -1,6 +1,23 @@
-import React, { Fragment } from "react";
+import axios from "axios";
+import React, { Fragment, useEffect, useState } from "react";
 
 const ShippingAddress = () => {
+  const customerId = JSON.parse(localStorage.getItem("customerId"));
+  const [customerAddress, setCustomerAddress] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_URL_BACKEND}customer/address/${customerId}`)
+      .then((res) => {
+        const result = res.data.data;
+        setCustomerAddress(result);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Fragment>
       <section className="customer-main-content">
@@ -13,16 +30,16 @@ const ShippingAddress = () => {
           <h5>Add new address</h5>
         </div>
 
-        <div className="default-address">
-          <p className="recipient-name mb-0">Andreas Jane</p>
-          <p className="complete-address mt-0">
-            Perumahan Sapphire Mediterania, Wiradadi, Kec. Sokaraja, Kabupaten
-            Banyumas, Jawa Tengah, 53181 [Tokopedia Note: blok c 16] Sokaraja,
-            Kab. Banyumas, 53181
-          </p>
+        {customerAddress.map((address, index) => (
+          <div className="default-address">
+            <p className="recipient-name mb-0">{address.receiptname}</p>
+            <p className="complete-address mt-0">
+              {address.address}, {address.city}, {address.postalcode}
+            </p>
 
-          <p className="change-address">Change address</p>
-        </div>
+            <p className="change-address">Change address</p>
+          </div>
+        ))}
       </section>
     </Fragment>
   );

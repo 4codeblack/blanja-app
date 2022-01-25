@@ -43,11 +43,14 @@ const Router = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="page-product/:id" element={<PageProduct />} />
-          <Route path={"profile"} element={<ProfileCustomer />}>
+          <Route path={"profile-customer"} element={<ProfileCustomer />}>
             <Route path={"account"} element={<MyAccount />} />
             <Route path={"address"} element={<ShippingAddress />} />
             <Route path={"order"} element={<MyOrder />} />
-            <Route index element={<Navigate to={"/main/profile/account"} />} />
+            <Route
+              index
+              element={<Navigate to={"/main/profile-customer/account"} />}
+            />
           </Route>
         </Route>
 

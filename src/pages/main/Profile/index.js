@@ -2,9 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './profile.css'
 import * as BiIcons from "react-icons/bi";
-import * as IoIcons from "react-icons/io5";
-import * as IoIoIcons from "react-icons/io";
-import * as FaIcons from "react-icons/fa";
 
 const Profile = () => {
   const [showMenuStore, setShowMenuStore] = useState(false)

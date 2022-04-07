@@ -120,7 +120,6 @@ const Register = () => {
                 })
                 .then((res) => {
                     setLoading(false)
-                    console.log(res.data.message)
                     navigate("/")
                 })
                 .catch((err) => {
@@ -141,7 +140,6 @@ const Register = () => {
                 })
                 .then((res) => {
                     setLoading(false)
-                    console.log(res.data.message)
                     navigate("/")
                 })
                 .catch((err) => {

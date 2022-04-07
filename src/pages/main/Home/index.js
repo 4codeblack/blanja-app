@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { CustomerContext } from "../../../context/CustomerContext";
 
 const Home = () => {
+  localStorage.removeItem("PictProducts")
   const { customer, setCustomer } = useContext(CustomerContext);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -34,8 +35,7 @@ const Home = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}customer/all-product`)
-      .then((res) => {
-        console.info(res.data);
+      .then((res) => {;
         const result = res.data.data;
         setProducts(result);
       })

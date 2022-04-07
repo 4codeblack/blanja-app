@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 const MyOrder = () => {
+  localStorage.removeItem("PictProducts")
   return (
     <Fragment>
       <section className="customer-main-content">

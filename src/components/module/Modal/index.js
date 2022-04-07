@@ -8,8 +8,7 @@ const Modal = ({ openModal }) => {
         picOne: '',
         picTwo: '',
         picThree: '',
-        picFour: '',
-        picFive: ''
+        picFour: ''
     })
     const [formError, setFormError] = useState({})
     const handleChangeForm = (e) => {
@@ -95,16 +94,6 @@ const Modal = ({ openModal }) => {
                         value={form.picFour} />
                 </div>
                 <div className="modal-formError text-danger">{formError.picFour}</div>
-                <div className="d-flex justify-content-center modal-inner-content mb-3">
-                    <div className="w-25 mt-2">Input URL Pic 5</div>
-                    <Input
-                        type="text"
-                        name="picFive"
-                        onChange={handleChangeForm}
-                        placeholder="Input URL Pic here"
-                        value={form.picFive} />
-                </div>
-                <div className="modal-formError text-danger">{formError.picFive}</div>
                 <div className="text-end">
                     <Button
                         className="mx-3 my-3 w-25 rounded-pill bg-danger text-white py-3"

@@ -10,6 +10,7 @@ import gopay from "../../../assets/img/Logo-GoPay-Vector-CDR-dan-PNG 1.svg";
 import pos from "../../../assets/img/kisspng-pos-indonesia-mail-point-of-sale-logo-indonesia-5aeb329c2f74d7 1.svg"
 
 const Checkout = () => {
+  localStorage.removeItem("PictProducts")
   const [modal, setModal] = useState(false);
   const [modalAddress, setModalAddress] = useState(false);
 
@@ -31,7 +32,6 @@ const Checkout = () => {
     axios
       .get(`${process.env.REACT_APP_URL_BACKEND}customer/address/180649`)
       .then((res) => {
-        console.info(res.data);
         const result = res.data.data;
         setAddress(result);
       })

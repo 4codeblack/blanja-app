@@ -29,7 +29,7 @@ const Navbar = () => {
   const logIn = () => navigate("/auth/login");
   const signUp = () => navigate("/auth/register");
 
-  const { searchProduct, setSearchProduct } = useContext(SearchContext);
+  const { setSearchProduct } = useContext(SearchContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const querySearch = searchParams.get("search");
 
@@ -41,7 +41,6 @@ const Navbar = () => {
       .then((res) => {
         const result = res.data.data;
         setSearchProduct(result);
-        console.log(result);
       })
       .catch((err) => {
         console.log(err.response);
@@ -55,7 +54,6 @@ const Navbar = () => {
       // navigate("/main/search");
     }
   };
-  console.log(searchProduct);
 
   return (
     <Fragment>

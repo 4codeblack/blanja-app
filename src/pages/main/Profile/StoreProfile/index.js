@@ -4,7 +4,7 @@ import Button from '../../../../components/base/Button';
 import Input from '../../../../components/base/Input';
 
 const StoreProfile = () => {
-  const [loading, setLoading] = useState(false)
+  localStorage.removeItem("PictProducts")
   const [formError, setFormError] = useState({})
 
   const [form, setForm] = useState({
@@ -46,8 +46,6 @@ const StoreProfile = () => {
   }
   const handleClickForm = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
-      setLoading(true)
-      console.log("dari form", form)
       alert("oke")
     }
   }
@@ -57,7 +55,6 @@ const StoreProfile = () => {
     const resultValidate = validateForm(form)
     setFormError(resultValidate)
     handleClickForm(resultValidate)
-    console.log("isi juga dari", form)
   }
   return (
     <div className="outer bg-light w-75">

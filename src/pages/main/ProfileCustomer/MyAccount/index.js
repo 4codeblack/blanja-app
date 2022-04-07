@@ -9,6 +9,7 @@ import { CustomerContext } from "../../../../context/CustomerContext";
 import { useNavigate } from "react-router-dom";
 
 const MyAccount = () => {
+  localStorage.removeItem("PictProducts")
   const { customer, setCustomer } = useContext(CustomerContext);
   const { editProfile, setEditProfile } = useContext(EditProfileContext);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
@@ -40,7 +41,6 @@ const MyAccount = () => {
       .catch((err) => {
         console.log(err.response);
       });
-    console.info(form);
   };
 
   useEffect(() => {

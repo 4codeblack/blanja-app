@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/base/Input'
 
 const Cart = () => {
+  localStorage.removeItem("PictProducts")
   const navigate = useNavigate()
   const handleBuy = () => {
     navigate("/main/checkout")
@@ -13,7 +14,6 @@ const Cart = () => {
   }
   const cartItem = JSON.parse(localStorage.getItem("item"));
   const [cart, setCart] = useState(cartItem)
-  console.log(cartItem);
 
   const [checkedState, setCheckedState] = useState(
     new Array(cart.length).fill(false)

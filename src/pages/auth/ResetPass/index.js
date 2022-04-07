@@ -20,7 +20,6 @@ const ResetPass = () => {
         if (formPassword.passwordNew !== formPassword.passwordNewConf) {
             return alert("password tidak sama")
         } else {
-            console.log(formPassword)
             navigate("/auth/conf-login")
         }
     }

@@ -3,7 +3,6 @@ import Button from '../../../../components/base/Button';
 import Input from '../../../../components/base/Input';
 import Modal from '../../../../components/module/Modal';
 import axios from 'axios';
-import ModalSuccess from '../../../../components/module/ModalSuccess';
 
 const SellingProduct = () => {
   const [loading, setLoading] = useState(false)
@@ -11,19 +10,17 @@ const SellingProduct = () => {
   const [category, setCategory] = useState("")
   const [conditions, setConditions] = useState("")
   const [modalPic, setModalPic] = useState(false)
-  const [modalSuccess, setModalSuccess] = useState(false)
   const ls = JSON.parse(localStorage.getItem("PictProducts"))
 
   const [form, setForm] = useState({
     name: '',
     price: '',
     qty: '',
-    photo1: 'https://picsum.photos/200/200?random=1',
-    photo2: 'https://picsum.photos/200/200?random=2',
-    photo3: 'https://picsum.photos/200/200?random=3',
-    photo4: 'https://picsum.photos/200/200?random=4',
-    photo5: 'https://picsum.photos/200/200?random=5',
-    description: '',
+    picOne: ls !== null ? ls.picOne : "",
+    picTwo: ls !== null ? ls.picOne : "",
+    picThree: ls !== null ? ls.picOne : "",
+    picFour: ls !== null ? ls.picOne : "",
+    description: ls !== null ? ls.picOne : "",
   })
 
   const handleChangeForm = (e) => {
@@ -63,8 +60,6 @@ const SellingProduct = () => {
   const handleClickForm = (resultValidate) => {
     if (Object.keys(resultValidate).length === 0) {
       setLoading(true)
-      console.log(form)
-      setModalSuccess(true)
       axios
         .post(`https://blanja-backend.herokuapp.com/seller/ipinstore/add-product`, {
           namestore: form.namestore,
@@ -72,19 +67,18 @@ const SellingProduct = () => {
           price: form.price,
           qty: form.qty,
           category: form.category,
-          photo1: form.photo1,
-          photo2: form.photo2,
-          photo3: form.photo3,
-          photo4: form.photo4,
+          photo1: ls.picOne,
+          photo2: ls.picTwo,
+          photo3: ls.picThree,
+          photo4: form.picFour,
           conditions: form.condition,
           description: form.description,
           id: form.id
         })
         .then((res) => {
           const result = res.data.message;
-          console.log(result);
           setLoading(false);
-          setModalSuccess(true)
+          alert(result)
         })
         .catch((err) => {
           console.log(err.response);
@@ -102,7 +96,6 @@ const SellingProduct = () => {
 
   const openModal = (params) => {
     setModalPic(params)
-    setModalSuccess(params)
   }
   return (
     <div className="outer bg-light w-75">
@@ -192,11 +185,10 @@ const SellingProduct = () => {
             <div className="border rounded-3 my-3">
               <div className="d-flex flex-column">
                 <div className="d-flex p-3 align-items-center">
-                  <img className="mx-3"  src={""} width={190} height={190} alt="" />
-                  <img className="mx-3" src={""} width={120} height={120} alt="" />
-                  <img className="mx-3" src={""} width={120} height={120} alt="" />
-                  <img className="mx-3" src={""} width={120} height={120} alt="" />
-                  <img className="mx-3" src={""} width={120} height={120} alt="" />
+                  <img className="mx-3"  src={ls !== null ? ls.picOne : ""} width={190} height={190} alt="" />
+                  <img className="mx-3" src={ls !== null ? ls.picTwo : ""} width={120} height={120} alt="" />
+                  <img className="mx-3" src={ls !== null ? ls.picThree : ""} width={120} height={120} alt="" />
+                  <img className="mx-3" src={ls !== null ? ls.picFour : ""} width={120} height={120} alt="" />
                 </div>
                 <div className="ms-5 text-muted ">Foto utama</div>
                 <div className="w-100 px-5"><hr /></div>
@@ -228,9 +220,6 @@ const SellingProduct = () => {
       <div className="text-end me-5 mb-5"><Button isLoading={loading} onClick={handleSubmitForm} className="rounded-pill px-5 py-3 text-white bg-danger">Jual</Button></div>
       {
         modalPic === true ? <Modal openModal={openModal} /> : ""
-      }
-      {
-        modalSuccess === true ? <ModalSuccess openModal={openModal} /> : ""
       }
     </div>
   )

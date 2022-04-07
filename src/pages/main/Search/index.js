@@ -28,7 +28,6 @@ const Search = () => {
       .then((res) => {
         const result = res.data.data;
         setSearchProduct(result);
-        console.log(result);
       })
       .catch((err) => {
         console.log(err.response);
@@ -36,7 +35,6 @@ const Search = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(searchProduct);
   return (
     <Fragment>
       <h1>Search</h1>

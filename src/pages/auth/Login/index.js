@@ -97,14 +97,12 @@ const LoginCustomer = () => {
     const resultValidate = validateCustomer(formCustomer);
     setFormErrorCustomer(resultValidate);
     handleClickCustomer(resultValidate);
-    console.log(formCustomer);
   };
   const handleSubmitSeller = (e) => {
     e.preventDefault();
     const resultValidate = validateSeller(formSeller);
     setFormErrorSeller(resultValidate);
     handleClickSeller(resultValidate);
-    console.log("isi dari", formSeller);
   };
 
   const handleClickCustomer = (resultValidate) => {
@@ -120,13 +118,11 @@ const LoginCustomer = () => {
           const customerId = result.id;
           localStorage.setItem("auth", "1");
           localStorage.setItem("customerId", JSON.stringify(customerId));
-          console.log(res.data.message);
           setLoading(false);
           setMessageResponse("");
           navigate("/");
         })
         .catch((err) => {
-          console.log(err.response);
           setLoading(false);
           setMessageResponse(err.response.data.message);
         });
@@ -145,13 +141,11 @@ const LoginCustomer = () => {
           const sellerId = result.id;
           localStorage.setItem("auth", "1");
           localStorage.setItem("sellerId", JSON.stringify(sellerId));
-          console.log(res.data.message);
           setLoading(false);
           setMessageResponse("");
           navigate("/");
         })
         .catch((err) => {
-          console.log(err.response);
           setLoading(false);
           setMessageResponse(true);
           setMessageResponse(err.response.data.message);

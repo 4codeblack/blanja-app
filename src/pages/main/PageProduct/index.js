@@ -7,6 +7,7 @@ import axios from "axios";
 import * as AiIcons from "react-icons/ai";
 
 const PageProduct = () => {
+    localStorage.removeItem("PictProducts")
     const [product, setProduct] = useState({
     })
     const { id } = useParams()
@@ -18,8 +19,6 @@ const PageProduct = () => {
             .then((res) => {
                 const result = res.data.data[0]
                 setProduct(result)
-                console.log(result);
-                console.log(id);
             })
             .catch((err) => {
             })
@@ -31,7 +30,6 @@ const PageProduct = () => {
         axios
             .get(`${process.env.REACT_APP_URL_BACKEND}customer/all-product`)
             .then((res) => {
-                console.info(res.data);
                 const result = res.data.data;
                 setProducts(result);
             })

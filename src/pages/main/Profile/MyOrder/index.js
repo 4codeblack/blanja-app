@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Input from '../../../../components/base/Input';
 
 const MyOrder = () => {
+  localStorage.removeItem("PictProducts")
   const [showTabAllItems, setShowTabAllItems] = useState(true)
   const [showTabGetPaid, setShowTabGetPaid] = useState(false)
   const [showTabProcessed, setShowTabProcessed] = useState(false)

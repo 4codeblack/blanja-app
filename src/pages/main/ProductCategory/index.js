@@ -5,6 +5,7 @@ import Cards from "../../../components/module/Cards";
 import "./productCategory.css";
 
 const ProductCategory = () => {
+  localStorage.removeItem("PictProducts")
   const [products, setProducts] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const ProductCategory = () => {
       .then((res) => {
         const result = res.data.data;
         setProducts(result);
-        console.log(result);
       })
       .catch((err) => {
         console.log(err.response);

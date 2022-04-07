@@ -3,6 +3,7 @@ import notFound from "../../assets/icons/notFound.jpg";
 import "./404.css";
 
 const Page404 = () => {
+  localStorage.removeItem("PictProducts")
   return (
     <div>
       <section className="d-flex flex-column justify-content-center align-items-center">

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
 
 const ShippingAddress = () => {
+  localStorage.removeItem("PictProducts")
   const customerId = JSON.parse(localStorage.getItem("customerId"));
   const [customerAddress, setCustomerAddress] = useState([]);
 
@@ -11,7 +12,6 @@ const ShippingAddress = () => {
       .then((res) => {
         const result = res.data.data;
         setCustomerAddress(result);
-        console.log(result);
       })
       .catch((err) => {
         console.log(err.response);
